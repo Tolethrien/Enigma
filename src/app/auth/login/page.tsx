@@ -1,15 +1,11 @@
-import { createServerClient } from "@/server/supabase/back";
+import { getUserData } from "@/server/supabase/back";
 import { login } from "../actions/actions";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
 export default async function Login() {
-  const supabase = createServerClient();
-
-  const { data } = await supabase.auth.getUser();
-  if (data?.user) {
-    redirect("/dashboard");
-  }
+  const user = await getUserData();
+  if (user) redirect("/dashboard");
   return (
     <div className="flex w-3/4 flex-grow flex-col items-center justify-evenly text-xl text-white sm:w-96">
       <h1 className="py-8 text-5xl">Enigma</h1>
@@ -39,7 +35,7 @@ export default async function Login() {
         <button formAction={login}>Login</button>
         <Link href={"./register"}>Register</Link>
       </form>
-      <Link href={"./register"} className="self-end">
+      <Link href={"./reset"} className="self-end">
         forgot again?
       </Link>
     </div>
