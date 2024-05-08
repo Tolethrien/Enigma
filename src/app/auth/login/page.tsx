@@ -2,40 +2,35 @@ import { getUserData } from "@/server/supabase/back";
 import { login } from "../actions/actions";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import Input from "@/app/components/input";
 
 export default async function Login() {
-  const user = await getUserData();
+  const { user } = await getUserData();
   if (user) redirect("/dashboard");
   return (
-    <div className="flex w-3/4 flex-grow flex-col items-center justify-evenly text-xl text-white sm:w-96">
-      <h1 className="py-8 text-5xl">Enigma</h1>
-      <form className="flex w-full flex-col items-center gap-8 ">
-        <label htmlFor="email" className="hidden">
-          Email:
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="email"
-          required
-          className="w-full border-b-2 bg-transparent  text-center placeholder-gray-400 outline-none"
-        />
-        <label htmlFor="password" className="hidden">
-          Password:
-        </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="password"
-          required
-          className="w-full border-b-2 bg-transparent   text-center placeholder-gray-400 outline-none"
-        />
-        <button formAction={login}>Login</button>
-        <Link href={"./register"}>Register</Link>
-      </form>
-      <Link href={"./reset"} className="self-end">
+    <div className="grid w-4/5 flex-grow grid-flow-row grid-rows-3 place-items-center text-xl text-white sm:w-96">
+      <h1 className="text-center text-5xl">Enigma</h1>
+      <div className="grid gap-8">
+        <form className="flex w-full flex-col items-center gap-4">
+          <Input
+            placeholder="email"
+            type="email"
+            formID="email"
+            required
+          ></Input>
+          <Input
+            placeholder="password"
+            type="password"
+            formID="password"
+            required
+          ></Input>
+          <button formAction={login}>Login</button>
+        </form>
+        <Link href={"./register"} className="text-center">
+          Register
+        </Link>
+      </div>
+      <Link href={"./reset"} className="justify-self-end">
         forgot again?
       </Link>
     </div>

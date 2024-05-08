@@ -1,4 +1,5 @@
 import { Database } from "@/types/database";
+import { UserMeta } from "@/types/userMeta";
 import {
   createServerClient as serverClient,
   type CookieOptions,
@@ -41,5 +42,6 @@ export function createServerClient() {
 export async function getUserData() {
   const supabase = createServerClient();
   const { data } = await supabase.auth.getUser();
-  return data.user;
+  const meta = data.user?.user_metadata as UserMeta | undefined;
+  return { user: data.user, meta: meta };
 }

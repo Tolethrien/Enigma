@@ -1,4 +1,4 @@
-import { addCard, getCards, getFolderData } from "@/server/supabase/actions";
+import { getCards, getFolderData } from "@/server/supabase/actions";
 import Link from "next/link";
 
 export default async function Folder({

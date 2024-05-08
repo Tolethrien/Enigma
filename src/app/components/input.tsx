@@ -4,6 +4,7 @@ interface Props {
   required?: boolean;
   className?: string;
   formID?: string;
+  defaultValue?: string | number;
 }
 enum TypeEnum {
   email = "email",
@@ -17,6 +18,7 @@ export default function Input({
   className,
   formID,
   required,
+  defaultValue,
 }: Props) {
   return (
     <>
@@ -24,10 +26,11 @@ export default function Input({
         {placeholder}
       </label>
       <input
-        id={formID}
+        name={formID}
         type={TypeEnum[type]}
         placeholder={placeholder}
         required={required ?? false}
+        defaultValue={defaultValue ?? ""}
         className={` border-b-2 bg-transparent  text-center text-white placeholder-gray-400 outline-none ${className}`}
       />
     </>
