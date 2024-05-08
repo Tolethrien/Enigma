@@ -16,6 +16,8 @@
 # production
 /build
 
+#pass to db
+pass.txt
 # misc
 .DS_Store
 *.pem
