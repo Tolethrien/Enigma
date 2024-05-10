@@ -1,7 +1,9 @@
-import { addFolder, getFolders } from "@/server/supabase/actions";
+import { getFolders } from "@/server/supabase/actions";
 import Input from "../components/input";
-import Icon from "./component/icon";
-import Link from "next/link";
+import AddTile from "./component/addTile";
+import FolderTile from "./component/folderTile";
+import { AddFolderIconTypes } from "@/types/types";
+export const dynamic = "force-dynamic";
 export default async function Dashboard() {
   const data = await getFolders();
 
@@ -12,10 +14,15 @@ export default async function Dashboard() {
         type="text"
         className=" w-1/2 self-start"
       ></Input>
-      <section className="grid grid-cols-3 place-items-center gap-4">
-        <Link href={"./dashboard/addFolder"}>Add new</Link>
+      <section className="grid grid-cols-3 place-items-center gap-y-2">
+        <AddTile></AddTile>
         {data?.map((post) => (
-          <Icon key={post.id} folderID={post.id} name={post.folder_name} />
+          <FolderTile
+            key={post.id}
+            folderID={post.id}
+            name={post.folder_name}
+            icon={post.icon_name as AddFolderIconTypes}
+          />
         ))}
       </section>
     </main>

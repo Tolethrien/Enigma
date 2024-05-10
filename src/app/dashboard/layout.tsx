@@ -15,7 +15,9 @@ export default async function DashboardLayout({
     <>
       <NavBar></NavBar>
       <div className={"w-full flex-grow"}>{children}</div>
-      <div className="h-8 pr-9 text-right">enigma</div>
+      <div className="flex h-8 w-full items-center justify-end bg-black bg-opacity-40 pr-9">
+        <p>Enigma</p>
+      </div>
     </>
   );
 }
