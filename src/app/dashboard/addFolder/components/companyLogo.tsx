@@ -12,7 +12,7 @@ export default function CompantyLogo({ name, isSelected, onClick }: Props) {
     <Image
       src={logos[name]}
       alt="logo icon"
-      className={`${isSelected && "scale-110 shadow-iconShadow"}`}
+      className={`${isSelected ? "scale-110 shadow-iconShadow" : "brightness-75"}`}
       onClick={onClick}
     />
   );

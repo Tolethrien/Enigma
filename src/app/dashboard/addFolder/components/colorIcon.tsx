@@ -19,7 +19,7 @@ interface Props {
 export default function ColorIcon({ color, onClick, isSelected }: Props) {
   return (
     <div
-      className={`h-6 w-6 rounded-full ${COLORS[color].bg} ${COLORS[color].shadow} shadow-innerColor cursor-pointer border-[1px] border-gray-500 border-opacity-50 ${isSelected && "scale-125"}`}
+      className={`h-6 w-6 rounded-full ${COLORS[color].bg} ${COLORS[color].shadow} shadow-innerColor cursor-pointer border-[1px] border-gray-500 border-opacity-50 ${isSelected ? "scale-125 brightness-125" : "brightness-75"}`}
       onClick={onClick}
     ></div>
   );
