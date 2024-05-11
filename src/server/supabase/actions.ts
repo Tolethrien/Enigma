@@ -32,6 +32,8 @@ export async function addFolder() {
   } = await supabase.auth.getUser();
   if (!user) throw new Error("no user found to add folder to");
   await supabase.from("Folder").insert({
+    hashtag: "",
+    icon_name: "",
     custome_sort_order: 0,
     folder_name: String(Math.random().toFixed(4)),
     user_id: user.id,
@@ -60,6 +62,5 @@ export async function removeFolder(form: FormData) {
     .from("Folder")
     .delete()
     .eq("folder_name", form.get("name") as unknown as string);
-  console.log(form.get("name"));
   revalidatePath("/", "layout");
 }
