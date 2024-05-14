@@ -8,14 +8,20 @@ import { removeFolderonClient } from "@/server/supabase/callbacks";
 import logos, { Logos } from "@/app/logos";
 import { AddFolderIconTypes } from "@/types/types";
 import { NameToUpper } from "@/utils/helpers";
-import { AvalibleIconColorsT, COLORS } from "../addFolder/components/colorIcon";
+import { AvalibleIconColorsT, COLORS } from "../[folder]/components/colorIcon";
 interface Props {
-  name: string;
+  folderName: string;
   folderID: number;
-  icon: AddFolderIconTypes;
+  folderIcon: AddFolderIconTypes;
+  folderHash: string;
 }
-export default function FolderTile({ folderID, name, icon }: Props) {
-  const isLogo = icon in logos ? true : false;
+export default function FolderTile({
+  folderHash,
+  folderIcon,
+  folderName,
+  folderID,
+}: Props) {
+  const isLogo = folderIcon in logos ? true : false;
   const ref = useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const router = useRouter();
@@ -38,7 +44,7 @@ export default function FolderTile({ folderID, name, icon }: Props) {
   };
   const deleteTile = async () => {
     window.removeEventListener("mousedown", handleOutSideClick);
-    await removeFolderonClient(name);
+    await removeFolderonClient(folderID);
     router.refresh();
   };
 
@@ -66,19 +72,19 @@ export default function FolderTile({ folderID, name, icon }: Props) {
       </button>
       {isLogo ? (
         <Image
-          src={logos[icon as Logos]}
+          src={logos[folderIcon as Logos]}
           alt="logo"
           className="flex h-1/2 w-1/2  shadow-iconImgShadow"
         ></Image>
       ) : (
         <div
-          className={`flex h-1/2 w-1/2 shadow-iconImgShadow ${COLORS[icon as AvalibleIconColorsT].bg} items-center justify-center text-4xl`}
+          className={`flex h-1/2 w-1/2 shadow-iconImgShadow ${COLORS[folderIcon as AvalibleIconColorsT].bg} items-center justify-center text-4xl`}
         >
-          {NameToUpper(name.charAt(0))}
+          {NameToUpper(folderName.charAt(0))}
         </div>
       )}
       <p className="flex h-[30%] items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap px-1 text-center text-white">
-        {name}
+        {folderName}
       </p>
     </Link>
   );

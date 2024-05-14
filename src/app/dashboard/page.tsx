@@ -14,14 +14,15 @@ export default async function Dashboard() {
         type="text"
         className=" w-1/2 self-start"
       ></Input>
-      <section className="grid grid-cols-3 place-items-center gap-y-2">
+      <section className="grid grid-cols-3 place-items-center gap-y-2 overflow-y-scroll">
         <AddTile></AddTile>
         {data?.map((post) => (
           <FolderTile
             key={post.id}
             folderID={post.id}
-            name={post.folder_name}
-            icon={post.icon_name as AddFolderIconTypes}
+            folderName={post.folder_name}
+            folderIcon={post.icon_name as AddFolderIconTypes}
+            folderHash=""
           />
         ))}
       </section>

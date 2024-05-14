@@ -1,9 +1,9 @@
 import { createFrontEndClient } from "./front";
 import { AddFolderIconTypes } from "@/types/types";
 
-export const removeFolderonClient = async (folderName: string) => {
+export const removeFolderonClient = async (folderID: number) => {
   const supabase = createFrontEndClient();
-  await supabase.from("Folder").delete().eq("folder_name", folderName);
+  await supabase.from("Folder").delete().eq("id", folderID);
 };
 
 export const addFolderonClient = async ({
