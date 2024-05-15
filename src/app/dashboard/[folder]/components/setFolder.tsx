@@ -24,9 +24,9 @@ export default function SetFolder({ type, data }: Props) {
     (data?.icon_name as AddFolderIconTypes | undefined) ?? "red",
   );
   const [error, setError] = useState<string>("");
-  const confirmData = () => {
+  const confirmData = async () => {
     if (type === "add")
-      addFolder({
+      await addFolder({
         custome_sort_order: 0,
         folder_name: companyName,
         hashtag: hashtag,
@@ -35,7 +35,7 @@ export default function SetFolder({ type, data }: Props) {
     else {
       if (!data) return;
       else
-        editFolder({
+        await editFolder({
           id: data.id,
           folder_name: companyName,
           hashtag: hashtag,
@@ -50,7 +50,7 @@ export default function SetFolder({ type, data }: Props) {
       <div className="flex w-full flex-grow flex-col justify-around">
         <Logo />
         <div className="flex  items-center justify-center">
-          <button className="text-xl" onClick={confirmData}>
+          <button className="text-xl" onClick={async () => await confirmData()}>
             {type === "add" ? "CREATE" : "CONFIRM"}
           </button>
         </div>
@@ -77,20 +77,16 @@ export default function SetFolder({ type, data }: Props) {
               type="text"
               className="h-8 self-end"
               value={companyName}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setCompanyName(event.target.value)
-              }
+              onChange={(e) => setCompanyName(e.target.value)}
             />
             <Input
               placeholder="#group..."
               type="text"
               className="h-8 self-end"
               value={hashtag.length === 0 ? "" : `#${hashtag}`}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              onChange={(e) =>
                 setHashtag(
-                  hashtag.length > 0
-                    ? event.target.value.slice(1)
-                    : event.target.value,
+                  hashtag.length > 0 ? e.target.value.slice(1) : e.target.value,
                 )
               }
             />
@@ -108,9 +104,7 @@ export default function SetFolder({ type, data }: Props) {
             <Input
               placeholder="search..."
               value={logoSearch}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setlogoSearch(event.target.value)
-              }
+              onChange={(e) => setlogoSearch(e.target.value)}
               type="text"
               className="ml-4"
             />

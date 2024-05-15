@@ -17,10 +17,10 @@ export type Database = {
           favorite: boolean
           id: number
           is_password: boolean
+          link: string | null
           login: string
           notes: string | null
           password: string | null
-          pin: number | null
           user_id: string
         }
         Insert: {
@@ -30,10 +30,10 @@ export type Database = {
           favorite?: boolean
           id?: number
           is_password?: boolean
+          link?: string | null
           login: string
           notes?: string | null
           password?: string | null
-          pin?: number | null
           user_id: string
         }
         Update: {
@@ -43,10 +43,10 @@ export type Database = {
           favorite?: boolean
           id?: number
           is_password?: boolean
+          link?: string | null
           login?: string
           notes?: string | null
           password?: string | null
-          pin?: number | null
           user_id?: string
         }
         Relationships: [

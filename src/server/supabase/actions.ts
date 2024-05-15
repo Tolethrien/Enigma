@@ -27,6 +27,15 @@ export async function getCards(folderID: number) {
   if (error) console.error("error to: ", error.message);
   return data;
 }
+export async function getCardData(cardID: number) {
+  const supabase = createServerClient();
+  const { data, error } = await supabase
+    .from("Cards")
+    .select("*")
+    .eq("id", cardID);
+  if (error) throw new Error(`${error}`);
+  return data[0];
+}
 export async function addFolder({
   custome_sort_order,
   folder_name,
@@ -73,20 +82,32 @@ export async function editFolder({
   revalidatePath("/", "layout");
   redirect("/dashboard");
 }
-export async function addCard(form: FormData) {
+export async function addCard({
+  at_folder,
+  card_name,
+  login,
+  is_password,
+  notes,
+  password,
+  link,
+}: Omit<TablesInsert<"Cards">, "created_at" | "favorite" | "user_id" | "id">) {
   const supabase = createServerClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) throw new Error("no user found to add folder to");
-
   await supabase.from("Cards").insert({
+    at_folder,
+    card_name,
+    login,
     user_id: user.id,
-    at_folder: form.get("name") as unknown as number,
-    card_name: String(Math.random().toFixed(4)),
-    login: "",
+    is_password,
+    notes,
+    password,
+    link,
   });
-  revalidatePath("/", "layout");
+  revalidatePath(`/dashboard/${at_folder}`, "layout");
+  redirect(`/dashboard/${at_folder}`);
 }
 
 export async function removeFolder(form: FormData) {

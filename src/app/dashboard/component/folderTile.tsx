@@ -5,10 +5,8 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { removeFolderonClient } from "@/server/supabase/callbacks";
-import logos, { Logos } from "@/app/logos";
 import { AddFolderIconTypes } from "@/types/types";
-import { NameToUpper } from "@/utils/helpers";
-import { AvalibleIconColorsT, COLORS } from "../[folder]/components/colorIcon";
+import GeneratedFolderIcon from "@/app/components/generatedIcon";
 interface Props {
   folderName: string;
   folderID: number;
@@ -16,12 +14,10 @@ interface Props {
   folderHash: string;
 }
 export default function FolderTile({
-  folderHash,
   folderIcon,
   folderName,
   folderID,
 }: Props) {
-  const isLogo = folderIcon in logos ? true : false;
   const ref = useRef<HTMLButtonElement>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const router = useRouter();
@@ -70,19 +66,7 @@ export default function FolderTile({
           </div>
         )}
       </button>
-      {isLogo ? (
-        <Image
-          src={logos[folderIcon as Logos]}
-          alt="logo"
-          className="flex h-1/2 w-1/2  shadow-iconImgShadow"
-        ></Image>
-      ) : (
-        <div
-          className={`flex h-1/2 w-1/2 shadow-iconImgShadow ${COLORS[folderIcon as AvalibleIconColorsT].bg} items-center justify-center text-4xl`}
-        >
-          {NameToUpper(folderName.charAt(0))}
-        </div>
-      )}
+      <GeneratedFolderIcon folderIcon={folderIcon} folderName={folderName} />
       <p className="flex h-[30%] items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap px-1 text-center text-white">
         {folderName}
       </p>

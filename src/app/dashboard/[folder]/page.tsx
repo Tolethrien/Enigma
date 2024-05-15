@@ -20,9 +20,14 @@ export default async function Folder({
             defaultValue={folder.id}
             className="hidden"
           />
-          <Link href={`./${params.folder}/addPassword`}>add new</Link>
+          <Link href={`./${params.folder}/addPassCard`}>add new</Link>
         </form>
-        {data?.map((card) => <p key={card.id}>{card.card_name}</p>)}
+        {data?.map((card) => (
+          <div key={card.id} className="grid">
+            <Link href={`./${params.folder}/${card.id}/edit`}> edit</Link>
+            <Link href={`./${params.folder}/${card.id}`}>{card.card_name}</Link>
+          </div>
+        ))}
       </div>
     </div>
   );
