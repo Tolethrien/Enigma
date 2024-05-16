@@ -1,10 +1,16 @@
-"use client";
-import { Ref, useState } from "react";
+import Image from "next/image";
+import menuIco from "@/app/assets/menuIco.svg";
+import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 interface Props {
-  forwardedRef: Ref<HTMLButtonElement>;
-  children: React.ReactNode;
+  onEdit: () => void;
+  onDelete: () => void;
+  className?: string;
 }
-export function ContextMenu({ forwardedRef, children }: Props) {
+export default function ContextMenu({ onEdit, onDelete, className }: Props) {
+  const ref = useRef<HTMLButtonElement>(null);
+  const router = useRouter();
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const openMenu = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -13,29 +19,33 @@ export function ContextMenu({ forwardedRef, children }: Props) {
   };
 
   const handleOutSideClick = (event: MouseEvent) => {
-    if (!forwardedRef!.current?.contains(event.target as Node)) {
+    if (!ref.current?.contains(event.target as Node)) {
       window.removeEventListener("mousedown", handleOutSideClick);
       setIsOpen(false);
     }
   };
+  const editTile = () => {
+    window.removeEventListener("mousedown", handleOutSideClick);
+    onEdit();
+  };
+  const deleteTile = async () => {
+    window.removeEventListener("mousedown", handleOutSideClick);
+    onDelete();
+    router.refresh();
+  };
   return (
-    <div className="relative">
-      {}
-      <div className="absolute right-1 top-1/2 rounded-md bg-[#313640] px-6 py-1 shadow-iconShadow">
-        {children}
-      </div>
-    </div>
+    <button className={`relative ${className} `} ref={ref} onClick={openMenu}>
+      <Image src={menuIco} alt="menu" className="mr-2" />
+      {isOpen && (
+        <div className="absolute right-1 top-1/2 rounded-md bg-[#313640] px-6 py-1 shadow-iconShadow">
+          <p className="hover:bg-slate-200" onClick={editTile}>
+            Edit
+          </p>
+          <p className="hover:bg-slate-200" onClick={deleteTile}>
+            Delete
+          </p>
+        </div>
+      )}
+    </button>
   );
-}
-export function ContextOption() {
-  return (
-    <div className="absolute right-1 top-1/2 rounded-md bg-[#313640] px-6 py-1 shadow-iconShadow">
-      <p className="hover:bg-slate-200" onClick={editTile}>
-        Edit
-      </p>
-    </div>
-  );
-}
-export function ContextButton({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
 }

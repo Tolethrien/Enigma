@@ -1,12 +1,10 @@
 "use client";
 import Link from "next/link";
-import menuIco from "@/app/assets/menuIco.svg";
-import Image from "next/image";
-import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { removeFolderonClient } from "@/server/supabase/callbacks";
 import { AddFolderIconTypes } from "@/types/types";
 import GeneratedFolderIcon from "@/app/components/generatedIcon";
+import ContextMenu from "@/app/components/contextMenu";
 interface Props {
   folderName: string;
   folderID: number;
@@ -18,54 +16,19 @@ export default function FolderTile({
   folderName,
   folderID,
 }: Props) {
-  const ref = useRef<HTMLButtonElement>(null);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const router = useRouter();
-
-  const openMenu = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsOpen(true);
-    window.addEventListener("mousedown", handleOutSideClick);
-  };
-
-  const handleOutSideClick = (event: MouseEvent) => {
-    if (!ref.current?.contains(event.target as Node)) {
-      window.removeEventListener("mousedown", handleOutSideClick);
-      setIsOpen(false);
-    }
-  };
-  const editTile = () => {
-    window.removeEventListener("mousedown", handleOutSideClick);
-    router.push(`./dashboard/${folderID}/edit`);
-  };
-  const deleteTile = async () => {
-    window.removeEventListener("mousedown", handleOutSideClick);
-    await removeFolderonClient(folderID);
-    router.refresh();
-  };
 
   return (
     <Link
       className="flex h-28 w-28 flex-col items-center rounded-md border-2 border-[#565656] bg-iconColor shadow-iconShadow"
       href={`./dashboard/${folderID}`}
     >
-      <button
-        className="relative flex h-1/5 w-full items-center justify-end"
-        onClick={openMenu}
-        ref={ref}
-      >
-        <Image src={menuIco} alt="menu" className="mr-2"></Image>
-        {isOpen && (
-          <div className="absolute right-1 top-1/2 rounded-md bg-[#313640] px-6 py-1 shadow-iconShadow">
-            <p className="hover:bg-slate-200" onClick={editTile}>
-              Edit
-            </p>
-            <p className="hover:bg-slate-200" onClick={deleteTile}>
-              Delete
-            </p>
-          </div>
-        )}
-      </button>
+      <div className="flex h-1/5 items-center justify-center self-end ">
+        <ContextMenu
+          onEdit={() => router.push(`./dashboard/${folderID}/edit`)}
+          onDelete={async () => await removeFolderonClient(folderID)}
+        />
+      </div>
       <GeneratedFolderIcon folderIcon={folderIcon} folderName={folderName} />
       <p className="flex h-[30%] items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap px-1 text-center text-white">
         {folderName}

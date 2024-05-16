@@ -2,7 +2,7 @@
 import { revalidatePath } from "next/cache";
 import { createServerClient } from "./back";
 import { redirect } from "next/navigation";
-import { Database, TablesInsert } from "@/types/database";
+import { Database, TablesInsert, TablesUpdate } from "@/types/database";
 export async function getFolders() {
   const supabase = createServerClient();
   const { data, error } = await supabase.from("Folder").select("*");
@@ -106,6 +106,38 @@ export async function addCard({
     password,
     link,
   });
+  revalidatePath(`/dashboard/${at_folder}`, "layout");
+  redirect(`/dashboard/${at_folder}`);
+}
+export async function editCard({
+  card_name,
+  login,
+  is_password,
+  notes,
+  password,
+  link,
+  at_folder,
+  id,
+}: Omit<TablesInsert<"Cards">, "created_at" | "favorite" | "user_id"> & {
+  id: number;
+}) {
+  const supabase = createServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("no user found to add folder to");
+  await supabase
+    .from("Cards")
+    .update({
+      card_name,
+      login,
+      user_id: user.id,
+      is_password,
+      notes,
+      password,
+      link,
+    })
+    .eq("id", id);
   revalidatePath(`/dashboard/${at_folder}`, "layout");
   redirect(`/dashboard/${at_folder}`);
 }

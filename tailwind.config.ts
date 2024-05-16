@@ -22,11 +22,15 @@ const config: Config = {
         innerColorCyan: "0 0 5px 2px rgba(14,116,144,0.4)",
         innerColorPurple: "0 0 5px 2px rgba(107,33,168,0.4)",
         innerColorPink: "0 0 5px 2px rgba(190,24,93,0.4)",
+        cardBottomShadow: "0 -2px 4px 0px rgba(0,0,0,1)",
+        cardTopShadow: "0 2px 4px 0px rgba(0,0,0,1)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "card-linear":
+          "linear-gradient(271.77deg, rgba(54, 27, 63, 0.4) 0.94%, rgba(36, 46, 66, 0.7) 81.74%)",
       },
     },
   },

@@ -6,8 +6,8 @@ import unfold from "@/app/assets/unfold.svg";
 import log from "@/app/assets/log.svg";
 import lock from "@/app/assets/lock.svg";
 import dice from "@/app/assets/dice.svg";
-import { addCard } from "@/server/supabase/actions";
-import { useState } from "react";
+import { addCard, editCard } from "@/server/supabase/actions";
+import { useRef, useState } from "react";
 import { TablesUpdate } from "@/types/database";
 type SetPassCardProps =
   | { type: "add"; folderID: number; data?: TablesUpdate<"Cards"> }
@@ -18,11 +18,32 @@ export default function SetPassCard(props: SetPassCardProps) {
   const [notes, setNotes] = useState<string>(props.data?.notes ?? "");
   const [cardName, setCardName] = useState<string>(props.data?.card_name ?? "");
   const [link, setLink] = useState<string>(props.data?.link ?? "");
-  const [isPassword, seIsPassword] = useState<boolean>(
+  const [isPassword, setIsPassword] = useState<boolean>(
     props.data?.is_password ?? true,
   );
   const [login, setLogin] = useState<string>(props.data?.login ?? "");
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const openMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsOpen(true);
+    window.addEventListener("mousedown", handleOutSideClick);
+  };
+
+  const handleOutSideClick = (event: MouseEvent) => {
+    if (!ref.current?.contains(event.target as Node)) {
+      window.removeEventListener("mousedown", handleOutSideClick);
+      setIsOpen(false);
+    }
+  };
+  const changePasswordType = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    window.removeEventListener("mousedown", handleOutSideClick);
+    setPass("");
+    setIsOpen(false);
+    setIsPassword(!isPassword);
+  };
 
   const confirmData = async () => {
     if (props.type === "add")
@@ -36,20 +57,24 @@ export default function SetPassCard(props: SetPassCardProps) {
         password: pass,
       });
     else {
-      //   if (!data) return;
-      //   else
-      //     await editFolder({
-      //       id: data.id,
-      //       folder_name: companyName,
-      //       hashtag: hashtag,
-      //       icon_name: pickedLogo,
-      //     });
+      if (!props.data) return;
+      else
+        await editCard({
+          id: props.data.id!,
+          at_folder: props.data.at_folder!,
+          card_name: cardName,
+          login,
+          notes,
+          is_password: isPassword,
+          link,
+          password: pass,
+        });
     }
   };
 
   return (
     <div className="flex w-full flex-grow flex-col justify-around">
-      <div className="grid justify-center gap-6">
+      <div className="grid  justify-center gap-6">
         <div className="flex flex-col items-center">
           <p className="pb-4 text-center text-2xl">New Password</p>
           <Input
@@ -85,18 +110,27 @@ export default function SetPassCard(props: SetPassCardProps) {
             <div className="flex">
               <Image alt="" src={lock} />
               <Input
-                placeholder="password"
-                type="text"
+                placeholder={isPassword ? "Password" : "PIN"}
+                type={isPassword ? "text" : "pin"}
                 value={pass}
                 onChange={(e) => setPass(e.target.value)}
               />
             </div>
-            <div className="flex gap-1">
+            <div className="relative flex gap-1" onClick={openMenu} ref={ref}>
               <p>{isPassword ? "Password" : "PIN"}</p>
-              <Image alt="" src={unfold} />
+              <Image
+                alt=""
+                src={unfold}
+                className={`${isOpen && "rotate-180"}`}
+              />
+              {isOpen && (
+                <div className="absolute top-full" onClick={changePasswordType}>
+                  {isPassword ? "PIN" : "Password"}
+                </div>
+              )}
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className={` flex gap-2 ${isOpen && "mt-4"}`}>
             <Image alt="" src={dice} className="rotate-45" />
             <p className="text-center text-xl">Generate Safe Pass</p>
             <Image alt="" src={dice} className=" -rotate-45" />
