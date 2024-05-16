@@ -5,5 +5,5 @@ export default async function PassCard({
 }: {
   params: { passCard: number };
 }) {
-  return <SetPassCard />;
+  return <div>temp</div>;
 }
