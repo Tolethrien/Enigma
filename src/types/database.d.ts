@@ -20,7 +20,7 @@ export type Database = {
           link: string | null
           login: string
           notes: string | null
-          password: string | null
+          password: string
           user_id: string
         }
         Insert: {
@@ -33,7 +33,7 @@ export type Database = {
           link?: string | null
           login: string
           notes?: string | null
-          password?: string | null
+          password: string
           user_id: string
         }
         Update: {
@@ -46,7 +46,7 @@ export type Database = {
           link?: string | null
           login?: string
           notes?: string | null
-          password?: string | null
+          password?: string
           user_id?: string
         }
         Relationships: [

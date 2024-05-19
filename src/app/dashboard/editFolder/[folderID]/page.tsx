@@ -1,11 +1,11 @@
 import { getFolderData } from "@/server/supabase/actions";
-import SetFolder from "../components/setFolder";
+import SetFolder from "../../[folder]/components/setFolder";
 
 export default async function EditFolder({
   params,
 }: {
-  params: { folder: number };
+  params: { folderID: number };
 }) {
-  const folder = await getFolderData(params.folder);
+  const folder = await getFolderData(params.folderID);
   return <SetFolder type="edit" data={folder} />;
 }

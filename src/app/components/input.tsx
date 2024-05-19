@@ -30,22 +30,16 @@ export default function Input({
   value,
 }: Props) {
   return (
-    <>
-      <label htmlFor={type} className="hidden">
-        {placeholder}
-      </label>
-
-      <input
-        ref={ref}
-        name={formID}
-        type={TypeEnum[type]}
-        placeholder={placeholder}
-        required={required ?? false}
-        defaultValue={defaultValue}
-        value={value}
-        onChange={onChange}
-        className={` border-b-2 bg-transparent  text-center text-white placeholder-gray-400 outline-none ${className}`}
-      />
-    </>
+    <input
+      ref={ref}
+      name={formID}
+      type={TypeEnum[type]}
+      placeholder={placeholder}
+      required={required ?? false}
+      defaultValue={defaultValue}
+      value={value}
+      onChange={onChange}
+      className={` border-b-2 bg-transparent  text-center text-white placeholder-gray-400 outline-none ${className}`}
+    />
   );
 }

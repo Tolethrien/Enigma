@@ -8,20 +8,27 @@ import lock from "@/app/assets/lock.svg";
 import dice from "@/app/assets/dice.svg";
 import { addCard, editCard } from "@/server/supabase/actions";
 import { useRef, useState } from "react";
-import { TablesUpdate } from "@/types/database";
+import { Tables } from "@/types/database";
+import { NameToUpper } from "@/utils/helpers";
+import {
+  cryptAddCardData,
+  cryptEditCardData,
+  decryptCardData,
+} from "@/crypto/cipher";
 type SetPassCardProps =
-  | { type: "add"; folderID: number; data?: TablesUpdate<"Cards"> }
-  | { type: "edit"; data: TablesUpdate<"Cards"> };
+  | { type: "add"; folderID: number }
+  | { type: "edit"; data: Tables<"Cards"> };
 
 export default function SetPassCard(props: SetPassCardProps) {
-  const [pass, setPass] = useState<string>(props.data?.password ?? "");
-  const [notes, setNotes] = useState<string>(props.data?.notes ?? "");
-  const [cardName, setCardName] = useState<string>(props.data?.card_name ?? "");
-  const [link, setLink] = useState<string>(props.data?.link ?? "");
+  const data = props.type === "edit" ? decryptCardData(props.data) : undefined;
+  const [pass, setPass] = useState<string>(data?.password ?? "");
+  const [notes, setNotes] = useState<string>(data?.notes ?? "");
+  const [cardName, setCardName] = useState<string>(data?.card_name ?? "");
+  const [link, setLink] = useState<string>(data?.link ?? "");
   const [isPassword, setIsPassword] = useState<boolean>(
-    props.data?.is_password ?? true,
+    data?.is_password ?? true,
   );
-  const [login, setLogin] = useState<string>(props.data?.login ?? "");
+  const [login, setLogin] = useState<string>(data?.login ?? "");
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -47,28 +54,30 @@ export default function SetPassCard(props: SetPassCardProps) {
 
   const confirmData = async () => {
     if (props.type === "add")
-      await addCard({
-        at_folder: props.folderID,
-        card_name: cardName,
-        login,
-        notes,
-        is_password: isPassword,
-        link,
-        password: pass,
-      });
-    else {
-      if (!props.data) return;
-      else
-        await editCard({
-          id: props.data.id!,
-          at_folder: props.data.at_folder!,
+      await addCard(
+        cryptAddCardData({
+          at_folder: props.folderID,
           card_name: cardName,
           login,
           notes,
           is_password: isPassword,
           link,
           password: pass,
-        });
+        }),
+      );
+    else if (props.type === "edit") {
+      await editCard(
+        cryptEditCardData({
+          id: props.data.id,
+          at_folder: props.data.at_folder,
+          card_name: cardName,
+          login,
+          notes,
+          is_password: isPassword,
+          link,
+          password: pass,
+        }),
+      );
     }
   };
 
@@ -81,7 +90,7 @@ export default function SetPassCard(props: SetPassCardProps) {
             placeholder="Dispay Name"
             type="text"
             className="mb-4 w-3/4"
-            value={cardName}
+            value={NameToUpper(cardName)}
             onChange={(e) => setCardName(e.target.value)}
           />
           <div className="flex gap-2">

@@ -1,7 +1,4 @@
-"use client";
-
-import { addCard } from "@/server/supabase/actions";
-import SetPassCard from "../[passCard]/components/setPassCard";
+import SetPassCard from "../components/setPassCard";
 
 export default function addPassCard({
   params,
