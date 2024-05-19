@@ -15,6 +15,7 @@ import {
   cryptEditCardData,
   decryptCardData,
 } from "@/crypto/cipher";
+import { generateStrongPassword } from "@/crypto/generatePassword";
 type SetPassCardProps =
   | { type: "add"; folderID: number }
   | { type: "edit"; data: Tables<"Cards"> };
@@ -139,7 +140,10 @@ export default function SetPassCard(props: SetPassCardProps) {
               )}
             </div>
           </div>
-          <div className={` flex gap-2 ${isOpen && "mt-4"}`}>
+          <div
+            className={` flex gap-2 ${isOpen && "mt-4"}`}
+            onClick={() => setPass(generateStrongPassword())}
+          >
             <Image alt="" src={dice} className="rotate-45" />
             <p className="text-center text-xl">Generate Safe Pass</p>
             <Image alt="" src={dice} className=" -rotate-45" />

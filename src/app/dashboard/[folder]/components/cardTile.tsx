@@ -33,7 +33,6 @@ export default function CardTile({ data }: Props) {
   const [showPass, setShowPass] = useState<boolean>(false);
   const [showMore, setShowMore] = useState<boolean>(false);
   const router = useRouter();
-
   return (
     <div
       className="flex h-fit flex-col items-center"
