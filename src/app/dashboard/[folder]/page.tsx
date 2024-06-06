@@ -18,8 +18,12 @@ export default async function Folder({
         <p>+</p>
         <p>Add New</p>
       </Link>
-      <div className="my-4 flex h-full flex-col gap-2 py-2 outline">
-        {data?.map((card) => <CardTile data={card} key={card.id} />)}
+      <div className="my-4 flex h-full flex-col items-center gap-2 overflow-y-auto rounded-lg border border-gray-500 py-2">
+        {data && data.length !== 0 ? (
+          data.map((card) => <CardTile data={card} key={card.id} />)
+        ) : (
+          <div>No Cards yet</div>
+        )}
       </div>
     </>
   );

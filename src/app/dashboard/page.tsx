@@ -7,13 +7,13 @@ export default async function Dashboard() {
   const data = await getAllFolders();
 
   return (
-    <main className="flex flex-col gap-8 px-4">
+    <main className="flex h-full flex-col gap-8 px-4">
       <Input
         placeholder="search..."
         type="text"
         className=" w-1/2 self-start"
       ></Input>
-      <section className="grid grid-cols-3 place-items-center gap-y-2 overflow-y-scroll">
+      <section className="grid flex-grow auto-rows-min grid-cols-3 items-start gap-y-2 overflow-y-scroll *:justify-self-center">
         <AddTile></AddTile>
         {data?.map((post) => <FolderTile key={post.id} data={post} />)}
       </section>
