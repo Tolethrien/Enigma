@@ -1,5 +1,5 @@
 import Input from "@/app/components/input";
-import { setNewPassword } from "../actions/actions";
+import { setNewPassword } from "@/server/supabase/actionsUser";
 
 export default async function NewPass({
   searchParams,

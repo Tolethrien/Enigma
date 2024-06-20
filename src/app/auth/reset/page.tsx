@@ -1,7 +1,7 @@
 import Input from "@/app/components/input";
+import { sendPasswordReset } from "@/server/supabase/actionsUser";
 import { getUserData } from "@/server/supabase/back";
 import { redirect } from "next/navigation";
-import { sendPasswordReset } from "../actions/actions";
 
 export default async function Reset() {
   const { user } = await getUserData();

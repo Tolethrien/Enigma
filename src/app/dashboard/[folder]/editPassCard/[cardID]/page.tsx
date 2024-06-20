@@ -1,4 +1,4 @@
-import { getCardData } from "@/server/supabase/actions";
+import { getCardData } from "@/server/supabase/actionsDB";
 import SetPassCard from "../../components/setPassCard";
 
 export default async function PassCardEdit({

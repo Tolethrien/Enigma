@@ -1,9 +1,29 @@
 "use server";
-
+import { createServerClient } from "./back";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-import { createServerClient } from "@/server/supabase/back";
+export const updateUserEmail = async (formData: FormData) => {
+  const data = {
+    email: formData.get("name") as string,
+  };
+  console.log(data.email);
+  const supabase = createServerClient();
+  const { error } = await supabase.auth.updateUser({
+    email: data.email,
+  });
+  if (error) throw new Error(error.message);
+};
+export const updateUserName = async (formData: FormData) => {
+  const data = {
+    name: formData.get("name") as string,
+  };
+  const supabase = createServerClient();
+  const { error } = await supabase.auth.updateUser({
+    data: { display_name: data.name },
+  });
+  if (error) throw new Error(error.message);
+};
 
 export async function login(formData: FormData) {
   const supabase = createServerClient();
@@ -74,4 +94,22 @@ export async function signup(formData: FormData) {
 
   revalidatePath("/", "layout");
   redirect("/dashboard");
+}
+export async function uploadAvatar(formData: FormData) {
+  //TODO: require S3 to ssr
+  const supabase = createServerClient();
+  const data = {
+    file: formData.get("file") as string,
+  };
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("no user");
+
+  const { error } = await supabase.storage
+    .from("avatars")
+    .upload("pobrane.jpeg", data.file, {
+      cacheControl: "3600",
+      upsert: false,
+    });
 }

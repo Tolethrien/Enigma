@@ -15,9 +15,9 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full max-w-[900px]">
+    <html lang="en" className="h-full w-full">
       <body
-        className={`${blinker.className} bg-primeBG flex h-full flex-col items-center`}
+        className={`${blinker.className} m-auto h-full max-w-screen-md bg-primeBG`}
       >
         {children}
       </body>

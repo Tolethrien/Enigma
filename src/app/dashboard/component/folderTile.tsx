@@ -1,22 +1,21 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { AddFolderIconTypes } from "@/types/types";
 import GeneratedFolderIcon from "@/app/components/generatedIcon";
 import ContextMenu from "@/app/components/contextMenu";
-import { removeFolder } from "@/server/supabase/actions";
+import { removeFolder } from "@/server/supabase/actionsDB";
 import { Tables } from "@/types/database";
-import { decryptFolderData } from "@/crypto/cipher";
 interface Props {
-  data: Tables<"Folder">;
+  data: Omit<Tables<"Folder">, "user_id">;
 }
-export default function FolderTile({ data }: Props) {
+export default function FolderTile({
+  data: { id, icon_name, folder_name },
+}: Props) {
   const router = useRouter();
-  const { folder_name, id, icon_name } = decryptFolderData(data);
 
   return (
     <Link
-      className="flex h-28 w-28 flex-col items-center rounded-md border-2 border-[#565656] bg-iconColor shadow-iconShadow"
+      className="flex h-28 w-28 flex-col items-center justify-self-center rounded-md border-2 border-[#565656] bg-iconColor shadow-iconShadow"
       href={`./dashboard/${id}`}
     >
       <div className="flex h-1/5 items-center justify-center self-end ">

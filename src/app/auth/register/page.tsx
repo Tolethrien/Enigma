@@ -1,7 +1,7 @@
 import { getUserData } from "@/server/supabase/back";
-import { signup } from "../actions/actions";
 import { redirect } from "next/navigation";
 import Input from "@/app/components/input";
+import { signup } from "@/server/supabase/actionsUser";
 
 export default async function Login() {
   const { user } = await getUserData();

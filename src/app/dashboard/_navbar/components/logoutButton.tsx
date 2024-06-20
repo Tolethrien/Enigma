@@ -1,17 +1,16 @@
 "use client";
 
-import { createFrontEndClient } from "@/server/supabase/front";
+import { LogoutUser } from "@/server/supabase/clientUser";
 import { useRouter } from "next/navigation";
 
 export default function LogoutButton() {
-  const supabase = createFrontEndClient();
   const router = useRouter();
   async function Logout() {
-    await supabase.auth.signOut();
+    await LogoutUser();
     router.refresh();
   }
   return (
-    <p onClick={Logout} className="cursor-pointer">
+    <p onClick={Logout} className="-mr-2 cursor-pointer pt-2 text-lg">
       Logout
     </p>
   );

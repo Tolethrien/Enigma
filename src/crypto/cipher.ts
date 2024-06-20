@@ -127,3 +127,16 @@ export function decryptFolderData({
     icon_name: decipher(icon_name),
   };
 }
+export function decryptAllFolderData(data: Tables<"Folder">[]) {
+  const decodedData: Omit<Tables<"Folder">, "user_id">[] = [];
+  data.forEach((folder) => {
+    decodedData.push({
+      custome_sort_order: folder.custome_sort_order,
+      id: folder.id,
+      folder_name: decipher(folder.folder_name),
+      hashtag: decipher(folder.hashtag),
+      icon_name: decipher(folder.icon_name),
+    });
+  });
+  return decodedData;
+}

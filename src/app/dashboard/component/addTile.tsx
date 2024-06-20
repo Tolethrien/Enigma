@@ -4,7 +4,7 @@ import plusIco from "@/app/assets/plusIco.svg";
 export default function AddTile() {
   return (
     <Link
-      className=" flex h-28 w-28 flex-col items-center rounded-md border-2 border-[#565656] bg-iconColor shadow-iconShadow"
+      className=" flex h-28 w-28 flex-col items-center justify-self-center rounded-md border-2 border-[#565656] bg-iconColor shadow-iconShadow"
       href={`./dashboard/addFolder`}
     >
       <div className="h-1/5 w-full"></div>

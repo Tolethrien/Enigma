@@ -1,5 +1,4 @@
-import GeneratedFolderIcon from "@/app/components/generatedIcon";
-import { getFolderData } from "@/server/supabase/actions";
+import { getFolderData } from "@/server/supabase/actionsDB";
 import Link from "next/link";
 import CompanyBar from "./components/companyBar";
 export default async function FolderLayout({

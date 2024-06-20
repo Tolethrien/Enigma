@@ -1,4 +1,4 @@
-import { getAllCards } from "@/server/supabase/actions";
+import { getAllCards } from "@/server/supabase/actionsDB";
 import Link from "next/link";
 import CardTile from "./components/cardTile";
 
@@ -18,7 +18,7 @@ export default async function Folder({
         <p>+</p>
         <p>Add New</p>
       </Link>
-      <div className="my-4 flex h-full flex-col items-center gap-2 overflow-y-auto rounded-lg border border-gray-500 py-2">
+      <div className="my-4 flex h-full max-h-[70vh]  flex-col items-center gap-2 overflow-y-auto rounded-lg border border-gray-500 py-2">
         {data && data.length !== 0 ? (
           data.map((card) => <CardTile data={card} key={card.id} />)
         ) : (
