@@ -1,30 +1,27 @@
-import { getAllCards } from "@/server/supabase/actionsDB";
+import { getAllCards, getFolderData } from "@/server/supabase/actionsDB";
 import Link from "next/link";
 import CardTile from "./components/cardTile";
+import ScrollableContent from "@/app/components/scrollContent";
+import FolderTitle from "./components/folderTitle";
 
 export default async function Folder({
   params,
 }: {
   params: { folder: number };
 }) {
-  const data = await getAllCards(params.folder);
+  const cardsData = await getAllCards(params.folder);
+  const folderData = await getFolderData(params.folder);
 
   return (
     <>
-      <Link
-        className="-mt-4 mr-8 flex w-fit gap-2 self-end rounded-md border-2 px-4 py-1"
-        href={`./${params.folder}/addPassCard`}
-      >
-        <p>+</p>
-        <p>Add New</p>
-      </Link>
-      <div className="my-4 flex h-full max-h-[70vh]  flex-col items-center gap-2 overflow-y-auto rounded-lg border border-gray-500 py-2">
-        {data && data.length !== 0 ? (
-          data.map((card) => <CardTile data={card} key={card.id} />)
+      <FolderTitle data={folderData} closePath="./" />
+      <ScrollableContent>
+        {cardsData && cardsData.length !== 0 ? (
+          cardsData.map((card) => <CardTile data={card} key={card.id} />)
         ) : (
           <div>No Cards yet</div>
         )}
-      </div>
+      </ScrollableContent>
     </>
   );
 }

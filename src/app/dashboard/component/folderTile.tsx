@@ -15,7 +15,7 @@ export default function FolderTile({
 
   return (
     <Link
-      className="flex h-28 w-28 flex-col items-center justify-self-center rounded-md border-2 border-[#565656] bg-iconColor shadow-iconShadow"
+      className="mini:h-28 mini:w-28 flex h-20 w-20 flex-col items-center justify-self-center rounded-md border-2 border-[#565656] bg-iconColor shadow-iconShadow sm:h-36 sm:w-36 md:h-48 md:w-48"
       href={`./dashboard/${id}`}
     >
       <div className="flex h-1/5 items-center justify-center self-end ">

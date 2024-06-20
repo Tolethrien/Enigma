@@ -37,11 +37,11 @@ export default function ContextMenu({ onEdit, onDelete, className }: Props) {
     <button className={`relative ${className} `} ref={ref} onClick={openMenu}>
       <Image src={menuIco} alt="menu" className="mr-2" />
       {isOpen && (
-        <div className="absolute right-1 top-1/2 rounded-md bg-[#313640] px-6 py-1 shadow-iconShadow">
-          <p className="hover:bg-slate-200" onClick={editTile}>
+        <div className="*:mini:text-xl absolute right-1 top-1/2  rounded-md bg-[#313640] py-1 shadow-iconShadow *:px-6 *:text-base sm:*:text-2xl">
+          <p className="hover:bg-slate-700" onClick={editTile}>
             Edit
           </p>
-          <p className="hover:bg-slate-200" onClick={deleteTile}>
+          <p className="hover:bg-slate-700" onClick={deleteTile}>
             Delete
           </p>
         </div>

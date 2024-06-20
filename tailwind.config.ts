@@ -12,6 +12,9 @@ const config: Config = {
         primeBG: "#282C34",
         iconColor: "#272D38",
       },
+      screens: {
+        mini: "365px",
+      },
       boxShadow: {
         iconShadow: "0 0 5px 1px rgba(255,255,255,0.25)",
         iconImgShadow: "4px 3px 5px 2px rgba(0,0,0,0.25)",

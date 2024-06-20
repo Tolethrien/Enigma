@@ -16,6 +16,7 @@ import {
   decryptCardData,
 } from "@/crypto/cipher";
 import { generateStrongPassword } from "@/crypto/generatePassword";
+import FolderTitle from "./folderTitle";
 type SetPassCardProps =
   | { type: "add"; folderID: number }
   | { type: "edit"; data: Tables<"Cards"> };
@@ -83,87 +84,93 @@ export default function SetPassCard(props: SetPassCardProps) {
   };
 
   return (
-    <div className="flex w-full flex-grow flex-col justify-around">
-      <div className="grid  justify-center gap-6">
-        <div className="flex flex-col items-center">
-          <p className="pb-4 text-center text-2xl">New Password</p>
-          <Input
-            placeholder="Dispay Name"
-            type="text"
-            className="mb-4 w-3/4"
-            value={NameToUpper(cardName)}
-            onChange={(e) => setCardName(e.target.value)}
-          />
-          <div className="flex gap-2">
-            <p className="text-center">Website</p>
-            <Image alt="" src={unfold} className="" />
-          </div>
-          <Input
-            placeholder="url"
-            type="text"
-            className="w-3/4"
-            value={link}
-            onChange={(e) => setLink(e.target.value)}
-          />
-        </div>
-        <div className="flex flex-col items-center justify-center gap-4">
-          <div className="flex ">
-            <Image alt="" src={log} />
+    <>
+      {/* <FolderTitle closePath="./"  /> */}
+      <div className="flex w-full flex-grow flex-col justify-around">
+        <div className="grid  justify-center gap-6">
+          <div className="flex flex-col items-center">
+            <p className="pb-4 text-center text-2xl">New Password</p>
             <Input
-              placeholder="login"
+              placeholder="Dispay Name"
               type="text"
-              value={login}
-              onChange={(e) => setLogin(e.target.value)}
+              className="mb-4 w-3/4"
+              value={NameToUpper(cardName)}
+              onChange={(e) => setCardName(e.target.value)}
+            />
+            <div className="flex gap-2">
+              <p className="text-center">Website</p>
+              <Image alt="" src={unfold} className="" />
+            </div>
+            <Input
+              placeholder="url"
+              type="text"
+              className="w-3/4"
+              value={link}
+              onChange={(e) => setLink(e.target.value)}
             />
           </div>
-          <div className="flex gap-4">
-            <div className="flex">
-              <Image alt="" src={lock} />
+          <div className="flex flex-col items-center justify-center gap-4">
+            <div className="flex ">
+              <Image alt="" src={log} />
               <Input
-                placeholder={isPassword ? "Password" : "PIN"}
-                type={isPassword ? "text" : "pin"}
-                value={pass}
-                onChange={(e) => setPass(e.target.value)}
+                placeholder="login"
+                type="text"
+                value={login}
+                onChange={(e) => setLogin(e.target.value)}
               />
             </div>
-            <div className="relative flex gap-1" onClick={openMenu} ref={ref}>
-              <p>{isPassword ? "Password" : "PIN"}</p>
-              <Image
-                alt=""
-                src={unfold}
-                className={`${isOpen && "rotate-180"}`}
-              />
-              {isOpen && (
-                <div className="absolute top-full" onClick={changePasswordType}>
-                  {isPassword ? "PIN" : "Password"}
-                </div>
-              )}
+            <div className="flex gap-4">
+              <div className="flex">
+                <Image alt="" src={lock} />
+                <Input
+                  placeholder={isPassword ? "Password" : "PIN"}
+                  type={isPassword ? "text" : "pin"}
+                  value={pass}
+                  onChange={(e) => setPass(e.target.value)}
+                />
+              </div>
+              <div className="relative flex gap-1" onClick={openMenu} ref={ref}>
+                <p>{isPassword ? "Password" : "PIN"}</p>
+                <Image
+                  alt=""
+                  src={unfold}
+                  className={`${isOpen && "rotate-180"}`}
+                />
+                {isOpen && (
+                  <div
+                    className="absolute top-full"
+                    onClick={changePasswordType}
+                  >
+                    {isPassword ? "PIN" : "Password"}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-          <div
-            className={` flex gap-2 ${isOpen && "mt-4"}`}
-            onClick={() => setPass(generateStrongPassword())}
-          >
-            <Image alt="" src={dice} className="rotate-45" />
-            <p className="text-center text-xl">Generate Safe Pass</p>
-            <Image alt="" src={dice} className=" -rotate-45" />
+            <div
+              className={` flex gap-2 ${isOpen && "mt-4"}`}
+              onClick={() => setPass(generateStrongPassword())}
+            >
+              <Image alt="" src={dice} className="rotate-45" />
+              <p className="text-center text-xl">Generate Safe Pass</p>
+              <Image alt="" src={dice} className=" -rotate-45" />
+            </div>
           </div>
         </div>
+        <div className="w-full">
+          <p className="pb-1 text-center text-xl">Notes</p>
+          <textarea
+            className="min-h-24 w-full bg-transparent p-1 outline"
+            placeholder="need context? you have 255 char for that!..."
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+          ></textarea>
+        </div>
+        <div className="self-center">
+          <button onClick={async () => await confirmData()}>
+            {props.type === "add" ? "CREATE" : "UPDATE"}
+          </button>
+        </div>
       </div>
-      <div className="w-full">
-        <p className="pb-1 text-center text-xl">Notes</p>
-        <textarea
-          className="min-h-24 w-full bg-transparent p-1 outline"
-          placeholder="need context? you have 255 char for that!..."
-          value={notes}
-          onChange={(e) => setNotes(e.target.value)}
-        ></textarea>
-      </div>
-      <div className="self-center">
-        <button onClick={async () => await confirmData()}>
-          {props.type === "add" ? "CREATE" : "UPDATE"}
-        </button>
-      </div>
-    </div>
+    </>
   );
 }
