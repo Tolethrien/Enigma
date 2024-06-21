@@ -14,13 +14,15 @@ export default function FolderTilesList({ data }: Props) {
   const decryptedData = decryptAllFolderData(data);
   return (
     <>
-      <Input
-        placeholder="search by name or #"
-        type="text"
-        className="my-4 ml-4 w-1/2"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      ></Input>
+      <form>
+        <Input
+          placeholder="search by name or #"
+          type="text"
+          className="my-4 ml-4 w-1/2"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        ></Input>
+      </form>
       <ScrollableContent className="grid auto-rows-min grid-cols-3 items-start gap-y-2">
         <AddTile></AddTile>
         {decryptedData

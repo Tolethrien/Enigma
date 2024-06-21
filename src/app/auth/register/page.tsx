@@ -11,7 +11,7 @@ export default async function Login() {
 
   return (
     <div className="flex h-full flex-col">
-      <h1 className="my-[10vh] text-center text-5xl">Enigma</h1>
+      <h1 className="my-[8vh] text-center text-5xl">Enigma</h1>
       <Link href="/auth/login" className="absolute right-8 top-[10vh] text-2xl">
         X
       </Link>

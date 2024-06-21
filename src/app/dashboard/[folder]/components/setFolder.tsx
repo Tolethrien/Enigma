@@ -21,7 +21,6 @@ type Props = { type: "add" } | { type: "edit"; data: Tables<"Folder"> };
 export default function SetFolder(props: Props) {
   const data =
     props.type === "edit" ? decryptFolderData(props.data) : undefined;
-  console.log(data);
   const [companyName, setCompanyName] = useState<string>(
     data?.folder_name ?? "",
   );

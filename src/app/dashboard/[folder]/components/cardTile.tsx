@@ -35,8 +35,8 @@ export default function CardTile({ data }: Props) {
   const [showMore, setShowMore] = useState<boolean>(false);
   const router = useRouter();
   return (
-    <div className="w-[98%]">
-      <div className="z-10 h-[2px] w-full bg-gray-500 shadow-cardTopShadow"></div>
+    <div className="relative w-[96%]">
+      <div className="absolute left-[-1%] top-0 z-10 h-[2px] w-[102%] bg-gray-500 shadow-cardTopShadow"></div>
       <div className="bg-card-linear">
         <div className="flex w-full py-2">
           <div className="relative flex w-24 items-center">
@@ -50,11 +50,11 @@ export default function CardTile({ data }: Props) {
             <Image
               src={favorite ? starLight : starDark}
               alt="favorite icon"
-              className="z-10 ml-2 w-6"
+              className="z-10 ml-2 w-6 cursor-pointer"
               onClick={async () => setCardFavorite(id, !favorite)}
             />
           </div>
-          <div className="flex-grow border-b-2 border-white text-center text-2xl">
+          <div className="flex-grow overflow-clip text-ellipsis text-nowrap border-b-2 border-white text-center text-2xl">
             {NameToUpper(card_name)}
           </div>
           <div className="flex w-24 justify-between">
@@ -70,41 +70,49 @@ export default function CardTile({ data }: Props) {
             />
           </div>
         </div>
-        {showMore && <p className="-mt-2 text-center">{link}</p>}
+        {showMore && (
+          <div className="-mt-2 flex w-full justify-center">
+            <p className="w-[90%] overflow-clip text-ellipsis text-nowrap text-center">
+              {link}
+            </p>
+          </div>
+        )}
         <div className="flex flex-col gap-4 py-2 text-xl">
           <div className="flex w-full pl-8">
-            <div className="flex gap-1">
-              <Image alt="" src={log} className="w-5" />
+            <div className="flex flex-shrink-0 items-center gap-1">
+              <Image alt="" src={log} className="h-5 w-5 " />
               <p className="w-24 text-center">Login:</p>
             </div>
-            <p className="flex-grow">{login}</p>
+            <p className="flex-grow overflow-clip text-ellipsis text-nowrap">
+              {login}
+            </p>
             <Image
               alt=""
               src={copyIco}
-              className="mr-8 w-6"
+              className="mr-8 h-6 w-6 cursor-pointer"
               onClick={() => navigator.clipboard.writeText(login)}
             />
           </div>
           <div className="flex w-full pl-8">
-            <div className="flex gap-1">
-              <Image alt="" src={lock} className="-ml-[2px] w-5" />
+            <div className="flex flex-shrink-0 items-center gap-1">
+              <Image alt="" src={lock} className="-ml-[2px] h-5 w-5" />
               <p className="w-24 text-center">
                 {is_password ? "Password:" : "PIN:"}
               </p>
             </div>
-            <p className="flex-grow pl-[2px]">
+            <p className="flex-grow overflow-clip text-ellipsis text-nowrap pl-[2px]">
               {showPass ? password : "**********"}
             </p>
             <Image
               alt=""
               src={showPass ? passwordVisible : passwordHidden}
-              className="mr-6 w-6"
+              className="mr-6 h-6 w-6 cursor-pointer"
               onClick={() => setShowPass(!showPass)}
             />
             <Image
               alt=""
               src={copyIco}
-              className="mr-8 w-6"
+              className="mr-8 h-6 w-6 cursor-pointer"
               onClick={() => navigator.clipboard.writeText(login)}
             />
           </div>
@@ -117,19 +125,19 @@ export default function CardTile({ data }: Props) {
             </p>
           </div>
         )}
-        <div
-          className="flex justify-center gap-2 py-2"
-          onClick={() => setShowMore(!showMore)}
-        >
-          <p>{showMore ? "Less Details" : "More Details"}</p>
+        <div className="flex justify-center gap-2 py-2">
+          <p onClick={() => setShowMore(!showMore)} className="cursor-pointer">
+            {showMore ? "Less Details" : "More Details"}
+          </p>
           <Image
             alt=""
             src={unfold}
-            className={`${showMore && "rotate-180"}`}
+            className={`${showMore && "rotate-180"} cursor-pointer`}
+            onClick={() => setShowMore(!showMore)}
           />
         </div>
       </div>
-      <div className="z-10 h-[2px] w-full bg-gray-500 shadow-cardBottomShadow"></div>
+      <div className="bottom-0-0 absolute left-[-1%] z-10 h-[2px] w-[102%] bg-gray-500 shadow-cardBottomShadow"></div>
     </div>
   );
 }

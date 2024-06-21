@@ -2,6 +2,8 @@ import OptionSlot from "./_components/optionSlot";
 import Modal from "./_components/modal";
 import ScrollableContent from "@/app/components/scrollContent";
 import Link from "next/link";
+import { getUserData } from "@/server/supabase/back";
+import { deleteUser } from "@/server/supabase/actionsUser";
 export type ParamType =
   | "name"
   | "email"
@@ -13,7 +15,9 @@ export type ParamType =
 interface Props {
   searchParams: { option: ParamType };
 }
-export default function UserSettings({ searchParams }: Props) {
+export default async function UserSettings({ searchParams }: Props) {
+  const { meta } = await getUserData();
+  if (!meta) return <div>something went wrong...</div>;
   return (
     <>
       {searchParams.option && <Modal modalType={searchParams.option} />}
@@ -27,10 +31,14 @@ export default function UserSettings({ searchParams }: Props) {
         {/* user */}
         <div className="w-full px-4">
           <p className="w-full border-b text-center text-2xl">User</p>
-          <OptionSlot optionName="Name" optionValue="Pavel" param={"name"} />
+          <OptionSlot
+            optionName="Name"
+            optionValue={meta.display_name}
+            param={"name"}
+          />
           <OptionSlot
             optionName="Email"
-            optionValue="some@some.pl"
+            optionValue={meta.email}
             param={"email"}
           />
           <OptionSlot
@@ -38,6 +46,7 @@ export default function UserSettings({ searchParams }: Props) {
             optionValue="********"
             param={"password"}
           />
+
           <OptionSlot
             optionName="Avatar"
             optionValue="ava.png"
@@ -49,18 +58,32 @@ export default function UserSettings({ searchParams }: Props) {
           <p className="w-full border-b text-center text-2xl">
             Personalization
           </p>
-          <p className="text-center">--------</p>
+          <p className="py-4 text-center">Nothing to personlize yet :) </p>
           {/* <OptionSlot
               optionName="Use Stegano..."
               optionValue="true"
               param={"stegano"}
               /> */}
         </div>
+        {/* Badge */}
+        <div className="flex w-full flex-col items-center px-4 text-center *:py-2">
+          <p className="w-full border-b text-2xl">Badge</p>
+          <p>
+            There is no Badge uploaded, you cannot decrypt your data without it!
+          </p>
+          <div className="h-[320px] w-[280px] rounded-md border-2 border-gray-500"></div>
+        </div>
         {/* Denger zone */}
         <div className="w-full px-4 text-center *:py-2">
           <p className="w-full border-b text-2xl">Danger Zone</p>
-          <p className="text-xl text-red-700">Delete Account</p>
-          <p className="text-xl text-violet-700">Upload Badge</p>
+          <form>
+            <button formAction={deleteUser} className="text-xl text-red-700">
+              Delete Account
+            </button>
+          </form>
+          <form>
+            <p className="text-xl text-violet-700">Upload Badge</p>
+          </form>
         </div>
       </ScrollableContent>
     </>

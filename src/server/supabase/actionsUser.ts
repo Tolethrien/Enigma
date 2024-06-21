@@ -85,7 +85,7 @@ export async function signup(formData: FormData) {
   const { error } = await supabase.auth.signUp({
     email: data.email,
     password: data.password,
-    options: { data: { display_name: data.name } },
+    options: { data: { display_name: data.name, email: data.email } },
   });
   if (error) {
     console.log(error);
@@ -93,7 +93,7 @@ export async function signup(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  redirect("/dashboard");
+  redirect("/auth/getBadge");
 }
 export async function uploadAvatar(formData: FormData) {
   //TODO: require S3 to ssr
@@ -112,4 +112,9 @@ export async function uploadAvatar(formData: FormData) {
       cacheControl: "3600",
       upsert: false,
     });
+}
+export async function deleteUser() {
+  const supabase = createServerClient();
+  await supabase.rpc("delete_user_account");
+  await supabase.auth.signOut();
 }

@@ -95,10 +95,7 @@ export default function SetPassCard(props: SetPassCardProps) {
               value={NameToUpper(cardName)}
               onChange={(e) => setCardName(e.target.value)}
             />
-            <div className="flex gap-2">
-              <p className="text-center">Website</p>
-              <Image alt="" src={unfold} className="" />
-            </div>
+            <p className="text-center">Website or App</p>
             <Input
               placeholder="url"
               type="text"
@@ -157,7 +154,7 @@ export default function SetPassCard(props: SetPassCardProps) {
         <div className="w-full">
           <p className="pb-1 text-center text-xl">Notes</p>
           <textarea
-            className="min-h-24 w-full bg-transparent p-1 outline"
+            className="min-h-24 w-full resize-none bg-transparent p-1 outline"
             placeholder="need context? you have 255 char for that!..."
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
