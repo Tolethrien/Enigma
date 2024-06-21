@@ -1,9 +1,22 @@
+import { getFolderData } from "@/server/supabase/actionsDB";
+import FolderTitle from "../components/folderTitle";
 import SetPassCard from "../components/setPassCard";
 
-export default function addPassCard({
+export default async function addPassCard({
   params,
 }: {
   params: { folder: number };
 }) {
-  return <SetPassCard folderID={params.folder} type="add" />;
+  const folderData = await getFolderData(params.folder);
+
+  return (
+    <>
+      <FolderTitle
+        data={folderData}
+        closePath={`/dashboard/${folderData.id}`}
+        withButton={false}
+      />
+      <SetPassCard folderID={params.folder} type="add" />;
+    </>
+  );
 }

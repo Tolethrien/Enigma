@@ -2,6 +2,7 @@ import { getUserData } from "@/server/supabase/back";
 import { redirect } from "next/navigation";
 import Input from "@/app/components/input";
 import { signup } from "@/server/supabase/actionsUser";
+import Link from "next/link";
 
 export default async function Login() {
   const { user } = await getUserData();
@@ -9,12 +10,15 @@ export default async function Login() {
   if (user) redirect("/dashboard");
 
   return (
-    <div className="grid w-4/5 flex-grow grid-flow-row grid-rows-3 place-items-center text-xl text-white sm:w-96">
-      <h1 className="text-center text-5xl">Enigma</h1>
-      <div className="grid">
-        <form className="flex w-full flex-col items-center gap-8">
+    <div className="flex h-full flex-col">
+      <h1 className="my-[10vh] text-center text-5xl">Enigma</h1>
+      <Link href="/auth/login" className="absolute right-8 top-[10vh] text-2xl">
+        X
+      </Link>
+      <div className="mt-[10vh] flex w-full flex-grow flex-col items-center gap-8">
+        <form className="flex flex-col gap-8 *:text-2xl *:placeholder:text-lg">
           <Input
-            placeholder="email"
+            placeholder="Email"
             type="email"
             formID="email"
             required

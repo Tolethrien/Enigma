@@ -16,7 +16,6 @@ import {
   decryptCardData,
 } from "@/crypto/cipher";
 import { generateStrongPassword } from "@/crypto/generatePassword";
-import FolderTitle from "./folderTitle";
 type SetPassCardProps =
   | { type: "add"; folderID: number }
   | { type: "edit"; data: Tables<"Cards"> };
@@ -85,7 +84,6 @@ export default function SetPassCard(props: SetPassCardProps) {
 
   return (
     <>
-      {/* <FolderTitle closePath="./"  /> */}
       <div className="flex w-full flex-grow flex-col justify-around">
         <div className="grid  justify-center gap-6">
           <div className="flex flex-col items-center">

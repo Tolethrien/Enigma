@@ -8,12 +8,12 @@ export default async function Login() {
   const { user } = await getUserData();
   if (user) redirect("/dashboard");
   return (
-    <div className="grid w-4/5 flex-grow grid-flow-row grid-rows-3 place-items-center text-xl text-white sm:w-96">
-      <h1 className="text-center text-5xl">Enigma</h1>
-      <div className="grid gap-8">
-        <form className="flex w-full flex-col items-center gap-4">
+    <div className="flex h-full flex-col">
+      <h1 className="my-[10vh] text-center text-5xl">Enigma</h1>
+      <div className="mt-[10vh] flex w-full flex-grow flex-col items-center gap-8">
+        <form className="flex flex-col gap-8 *:text-2xl *:placeholder:text-lg">
           <Input
-            placeholder="email"
+            placeholder="Email"
             type="email"
             formID="email"
             required
@@ -26,11 +26,14 @@ export default async function Login() {
           ></Input>
           <button formAction={login}>Login</button>
         </form>
-        <Link href={"./register"} className="text-center">
+        <Link
+          href={"./register"}
+          className="flex w-full items-center justify-center text-2xl"
+        >
           Register
         </Link>
       </div>
-      <Link href={"./reset"} className="justify-self-end">
+      <Link href={"./reset"} className="my-[15vh] mr-6 text-right text-2xl">
         forgot again?
       </Link>
     </div>

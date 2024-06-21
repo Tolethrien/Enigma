@@ -3,6 +3,7 @@ import Link from "next/link";
 import GeneratedFolderIcon from "@/app/components/generatedIcon";
 import { Tables } from "@/types/database";
 import { decryptFolderData } from "@/crypto/cipher";
+import AddNewButton from "./addNewButton";
 interface Props {
   data: Omit<Tables<"Folder">, "user_id">;
   withButton?: boolean;
@@ -37,15 +38,7 @@ export default function FolderTitle({
           >
             #{hashtag}
           </p>
-          {withButton && (
-            <Link
-              className=" mr-8 flex w-fit gap-2 self-end rounded-md border-2 px-4 py-1"
-              href={`./${data.id}/addPassCard`}
-            >
-              <p>+</p>
-              <p>Add New</p>
-            </Link>
-          )}
+          {withButton && <AddNewButton pathID={data.id} />}
         </div>
       </div>
     </>
