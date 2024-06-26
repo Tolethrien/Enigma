@@ -4,7 +4,7 @@ import Input from "@/app/components/input";
 import { signup } from "@/server/supabase/actionsUser";
 import Link from "next/link";
 
-export default async function Login() {
+export default async function Register() {
   const { user } = await getUserData();
 
   if (user) redirect("/dashboard");

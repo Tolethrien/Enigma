@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 
 import { getUserData } from "@/server/supabase/back";
 import NavBar from "./_navbar/navbar";
+import AppProvider from "../providers/appProvider";
 
 export default async function DashboardLayout({
   children,
@@ -12,12 +13,14 @@ export default async function DashboardLayout({
   if (!user) redirect("/");
 
   return (
-    <div className="flex h-dvh flex-col">
-      <NavBar></NavBar>
-      <>{children}</>
-      <div className="flex h-8 w-full items-center justify-end bg-black bg-opacity-40 pr-9">
-        <p>Enigma</p>
+    <AppProvider>
+      <div className="flex h-dvh flex-col">
+        <NavBar></NavBar>
+        {children}
+        <div className="flex h-8 w-full items-center justify-end bg-black bg-opacity-40 pr-9">
+          <p>Enigma</p>
+        </div>
       </div>
-    </div>
+    </AppProvider>
   );
 }

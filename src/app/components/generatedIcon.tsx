@@ -25,7 +25,7 @@ export default function GeneratedFolderIcon({
         ></Image>
       ) : (
         <div
-          className={`flex h-1/2 w-1/2 shadow-iconImgShadow ${COLORS[folderIcon as AvalibleIconColorsT].bg} ${className} items-center justify-center text-4xl`}
+          className={`flex h-1/2 w-1/2 shadow-iconImgShadow ${COLORS[folderIcon as AvalibleIconColorsT]?.bg ?? "bg-red-300"} ${className} items-center justify-center text-4xl`}
         >
           {NameToUpper(folderName.charAt(0))}
         </div>

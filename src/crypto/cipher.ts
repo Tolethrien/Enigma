@@ -1,22 +1,31 @@
-import { createCipheriv, createDecipheriv } from "crypto";
-import { iv, key } from "./cred";
+import { createCipheriv, createDecipheriv, randomBytes } from "crypto";
 import { Tables } from "@/types/database";
-
+function haveCreds() {
+  if (sessionStorage.getItem("enigmaKey") && sessionStorage.getItem("enigmaIv"))
+    return true;
+  return false;
+}
+export function generateCreds() {
+  const key = randomBytes(32).toString("hex");
+  const iv = randomBytes(16).toString("hex");
+  return { key, iv };
+}
 function cipher(text: string) {
+  if (!haveCreds()) return text;
   const cipher = createCipheriv(
     "aes256",
-    Buffer.from(key, "hex"),
-    Buffer.from(iv, "hex"),
+    Buffer.from(sessionStorage.getItem("enigmaKey")!, "hex"),
+    Buffer.from(sessionStorage.getItem("enigmaIv")!, "hex"),
   );
   return cipher.update(text, "utf-8", "hex") + cipher.final("hex");
 }
 function decipher(text: string) {
+  if (!haveCreds()) return text;
   const decipher = createDecipheriv(
     "aes256",
-    Buffer.from(key, "hex"),
-    Buffer.from(iv, "hex"),
+    Buffer.from(sessionStorage.getItem("enigmaKey")!, "hex"),
+    Buffer.from(sessionStorage.getItem("enigmaIv")!, "hex"),
   );
-
   return decipher.update(text, "hex", "utf-8") + decipher.final("utf-8");
 }
 export function cryptAddCardData({

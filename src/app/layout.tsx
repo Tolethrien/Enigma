@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Blinker } from "next/font/google";
 import "./globals.css";
-
 const blinker = Blinker({ weight: ["400", "600"], subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Enigma",

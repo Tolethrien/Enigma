@@ -16,7 +16,7 @@ export default async function addPassCard({
         closePath={`/dashboard/${folderData.id}`}
         withButton={false}
       />
-      <SetPassCard folderID={params.folder} type="add" />;
+      <SetPassCard folderID={params.folder} type="add" />
     </>
   );
 }

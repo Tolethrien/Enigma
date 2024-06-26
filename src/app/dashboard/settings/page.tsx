@@ -4,6 +4,10 @@ import ScrollableContent from "@/app/components/scrollContent";
 import Link from "next/link";
 import { getUserData } from "@/server/supabase/back";
 import { deleteUser } from "@/server/supabase/actionsUser";
+import Badge from "./_components/badge";
+import { use } from "react";
+import { assert } from "console";
+import { assertion } from "@/utils/helpers";
 export type ParamType =
   | "name"
   | "email"
@@ -16,7 +20,9 @@ interface Props {
   searchParams: { option: ParamType };
 }
 export default async function UserSettings({ searchParams }: Props) {
-  const { meta } = await getUserData();
+  const { meta, user } = await getUserData();
+  const id = user?.id;
+  assertion(id);
   if (!meta) return <div>something went wrong...</div>;
   return (
     <>
@@ -68,10 +74,7 @@ export default async function UserSettings({ searchParams }: Props) {
         {/* Badge */}
         <div className="flex w-full flex-col items-center px-4 text-center *:py-2">
           <p className="w-full border-b text-2xl">Badge</p>
-          <p>
-            There is no Badge uploaded, you cannot decrypt your data without it!
-          </p>
-          <div className="h-[320px] w-[280px] rounded-md border-2 border-gray-500"></div>
+          <Badge id={id} />
         </div>
         {/* Denger zone */}
         <div className="w-full px-4 text-center *:py-2">
@@ -81,9 +84,7 @@ export default async function UserSettings({ searchParams }: Props) {
               Delete Account
             </button>
           </form>
-          <form>
-            <p className="text-xl text-violet-700">Upload Badge</p>
-          </form>
+          <form></form>
         </div>
       </ScrollableContent>
     </>

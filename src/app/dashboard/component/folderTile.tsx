@@ -25,9 +25,9 @@ export default function FolderTile({
         />
       </div>
       <GeneratedFolderIcon folderIcon={icon_name} folderName={folder_name} />
-      <p className="flex h-[30%] items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap px-1 text-center text-white">
-        {folder_name}
-      </p>
+      <div className="flex h-[30%] w-full items-center justify-center px-1  text-white">
+        <p className="overflow-clip text-ellipsis text-nowrap">{folder_name}</p>
+      </div>
     </Link>
   );
 }

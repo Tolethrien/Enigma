@@ -1,4 +1,3 @@
-import frameImg from "@/app/assets/Badge.svg";
 type RGB = [number, number, number];
 type Creds = { key: string; iv: string };
 const GRID_SIZE = 200;
