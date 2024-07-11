@@ -3,7 +3,7 @@ import Modal from "./_components/modal";
 import ScrollableContent from "@/app/components/scrollContent";
 import Link from "next/link";
 import { getUserData } from "@/server/supabase/back";
-import { deleteUser, detTest } from "@/server/supabase/actionsUser";
+import { deleteUser } from "@/server/supabase/actionsUser";
 import Badge from "./_components/badge";
 import { use } from "react";
 import { assert } from "console";
