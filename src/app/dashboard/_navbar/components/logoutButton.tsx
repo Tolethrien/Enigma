@@ -1,12 +1,15 @@
 "use client";
 
 import { LogoutUser } from "@/server/supabase/clientUser";
+import { getSessionStorage } from "@/utils/helpers";
 import { useRouter } from "next/navigation";
 
 export default function LogoutButton() {
   const router = useRouter();
+
   async function Logout() {
-    sessionStorage.clear();
+    const sessStore = getSessionStorage();
+    sessStore?.clear();
     await LogoutUser();
     router.refresh();
   }

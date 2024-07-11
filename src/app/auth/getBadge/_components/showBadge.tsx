@@ -6,11 +6,12 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { GetUserID } from "@/server/supabase/clientUser";
 import { generateCreds } from "@/crypto/cipher";
-import { saveBadge } from "@/utils/helpers";
+import { getLocalStorage, saveBadge } from "@/utils/helpers";
 export default function GeneratedBadge() {
+  const localStore = getLocalStorage();
   const [data, setData] = useState<string>("");
   const [badge] = useState<boolean>(
-    localStorage.getItem("badge") ? true : false,
+    localStore?.getItem("badge") ? true : false,
   );
   const route = useRouter();
   const { iv, key } = generateCreds();
@@ -23,7 +24,7 @@ export default function GeneratedBadge() {
         const data = await generateBadge({ key, iv });
         const id = await GetUserID();
         setData(data);
-        localStorage.setItem(`badge-${id}`, data);
+        localStore?.setItem(`badge-${id}`, data);
       }
     };
 

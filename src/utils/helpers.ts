@@ -16,3 +16,7 @@ export const saveBadge = (badge: string) => {
   downloadImage.click();
   downloadImage.remove();
 };
+export const getLocalStorage = () =>
+  typeof window === "undefined" ? undefined : localStorage;
+export const getSessionStorage = () =>
+  typeof window === "undefined" ? undefined : sessionStorage;
