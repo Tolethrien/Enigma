@@ -54,7 +54,7 @@ export default function CardTile({ data }: Props) {
               onClick={async () => setCardFavorite(id, !favorite)}
             />
           </div>
-          <div className="flex-grow overflow-clip text-ellipsis text-nowrap border-b-2 border-white text-center text-2xl">
+          <div className="flex-grow overflow-hidden text-ellipsis text-nowrap border-b-2 border-white text-center text-2xl">
             {NameToUpper(card_name)}
           </div>
           <div className="flex w-24 justify-between">
@@ -72,7 +72,7 @@ export default function CardTile({ data }: Props) {
         </div>
         {showMore && (
           <div className="-mt-2 flex w-full justify-center">
-            <p className="w-[90%] overflow-clip text-ellipsis text-nowrap text-center">
+            <p className="w-[90%] overflow-hidden text-ellipsis text-nowrap text-center">
               {link}
             </p>
           </div>
@@ -83,7 +83,7 @@ export default function CardTile({ data }: Props) {
               <Image alt="" src={log} className="h-5 w-5 " />
               <p className="w-24 text-center">Login:</p>
             </div>
-            <p className="flex-grow overflow-clip text-ellipsis text-nowrap">
+            <p className="flex-grow overflow-hidden text-ellipsis text-nowrap">
               {login}
             </p>
             <Image
@@ -100,7 +100,7 @@ export default function CardTile({ data }: Props) {
                 {is_password ? "Password:" : "PIN:"}
               </p>
             </div>
-            <p className="flex-grow overflow-clip text-ellipsis text-nowrap pl-[2px]">
+            <p className="flex-grow overflow-hidden text-ellipsis text-nowrap pl-[2px]">
               {showPass ? password : "**********"}
             </p>
             <Image
