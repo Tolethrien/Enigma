@@ -1,15 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { GetUserID } from "@/server/supabase/clientUser";
 import { loadImage, readBadge } from "@/crypto/stegano";
+import { saveBadge } from "@/utils/helpers";
 interface Props {
   id: string;
 }
 export default function Badge({ id }: Props) {
   const [badge, setBadge] = useState(localStorage.getItem(`badge-${id}`));
-  //   const base64 = localStorage.getItem(`badge-${id}`);
   const router = useRouter();
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -46,7 +45,17 @@ export default function Badge({ id }: Props) {
             ></input>
           </label>
         ) : (
-          <Image src={badge} alt="img" width={280} height={320} unoptimized />
+          <>
+            <Image src={badge} alt="img" width={280} height={320} unoptimized />
+            <div className="absolute flex h-[320px] w-[280px] items-center justify-center bg-black bg-opacity-15">
+              <button
+                className="rounded-md border-2 border-gray-400 bg-primeBG  px-4 py-2 text-xl"
+                onClick={() => saveBadge(badge)}
+              >
+                Save Badge
+              </button>
+            </div>
+          </>
         )}
       </div>
     </>

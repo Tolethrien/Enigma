@@ -3,11 +3,12 @@ import Modal from "./_components/modal";
 import ScrollableContent from "@/app/components/scrollContent";
 import Link from "next/link";
 import { getUserData } from "@/server/supabase/back";
-import { deleteUser } from "@/server/supabase/actionsUser";
+import { deleteUser, detTest } from "@/server/supabase/actionsUser";
 import Badge from "./_components/badge";
 import { use } from "react";
 import { assert } from "console";
 import { assertion } from "@/utils/helpers";
+import ClearBadge from "./_components/clearBadge";
 export type ParamType =
   | "name"
   | "email"
@@ -84,7 +85,7 @@ export default async function UserSettings({ searchParams }: Props) {
               Delete Account
             </button>
           </form>
-          <form></form>
+          <ClearBadge id={id} />
         </div>
       </ScrollableContent>
     </>
