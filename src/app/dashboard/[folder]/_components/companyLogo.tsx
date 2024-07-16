@@ -1,5 +1,5 @@
-import type { Logos } from "@/app/logos";
-import logos from "@/app/logos";
+import type { Logos } from "@/utils/logos";
+import logos from "@/utils/logos";
 import Image from "next/image";
 
 interface Props {

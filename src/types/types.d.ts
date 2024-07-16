@@ -1,3 +1,3 @@
-import type { AvalibleIconColorsT } from "@/app/dashboard/[folder]/components/colorIcon";
-import type { Logos } from "@/app/logos";
+import type { AvalibleIconColorsT } from "@/app/dashboard/[folder]/_components/colorIcon";
+import type { Logos } from "@/utils/logos";
 export type AddFolderIconTypes = AvalibleIconColorsT | Logos;

@@ -43,16 +43,15 @@ export async function getCardData(cardID: number) {
 }
 //FOLDER
 export async function addFolder({
-  custome_sort_order,
   folder_name,
   hashtag,
   icon_name,
-}: Omit<TablesInsert<"Folder">, "user_id" | "id">) {
+}: Omit<TablesInsert<"Folder">, "user_id" | "id" | "custome_sort_order">) {
   const { supabase, user } = await getStoreWithUser();
   await supabase.from("Folder").insert({
     hashtag,
     icon_name,
-    custome_sort_order,
+    custome_sort_order: 0,
     folder_name: folder_name.toLowerCase(),
     user_id: user.id,
   });

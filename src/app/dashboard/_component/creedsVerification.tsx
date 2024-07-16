@@ -3,27 +3,27 @@ import { loadImage, readBadge } from "@/crypto/stegano";
 import { GetUserID } from "@/server/supabase/clientUser";
 import { getLocalStorage, getSessionStorage } from "@/utils/helpers";
 import { useRouter } from "next/navigation";
-import { createContext, useEffect, useState } from "react";
+import { useEffect } from "react";
 interface Props {
   children: React.ReactNode;
 }
 interface AppProvider {}
 // zmienic na layout dashbordu nie apki calej
 
-export const AppContext = createContext<AppProvider>({});
-export default function AppProvider({ children }: Props) {
-  const localStore = getLocalStorage();
-  const sessStore = getSessionStorage();
-
+// export const AppContext = createContext<AppProvider>({});
+export default function CreedsVerification({ children }: Props) {
   const router = useRouter();
 
   useEffect(() => {
     const getCreds = async () => {
+      const sessStore = getSessionStorage();
+      const localStore = getLocalStorage();
       //TODO: error handler tu bo moze go nie byc
       //TODO: dodac ze poki effekt sie nie skonczy bedzie jakis spinner ze sie dzieje
-      console.log("provider");
       const id = await GetUserID();
-      const img = await loadImage(localStore?.getItem(`badge-${id}`)!);
+      const badgeID = localStore?.getItem(`badge-${id}`);
+      if (!badgeID) return; // TODO: fallback to error
+      const img = await loadImage(badgeID);
       const { iv, key } = readBadge(img);
       sessStore?.setItem("enigmaKey", key);
       sessStore?.setItem("enigmaIv", iv);
@@ -31,5 +31,5 @@ export default function AppProvider({ children }: Props) {
     };
     getCreds();
   }, []);
-  return <AppContext.Provider value={{}}>{children}</AppContext.Provider>;
+  return <>{children}</>;
 }

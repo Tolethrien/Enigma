@@ -3,7 +3,7 @@ import Image from "next/image";
 import starDark from "@/app/assets/notFavorite.svg";
 import starLight from "@/app/assets/favorite.svg";
 import dateValid from "@/app/assets/passValid.svg";
-import ContextMenu from "@/app/components/contextMenu";
+import ContextMenu from "@/app/_components/contextMenu";
 import copyIco from "@/app/assets/copy.svg";
 import log from "@/app/assets/log.svg";
 import lock from "@/app/assets/lock.svg";
@@ -15,22 +15,22 @@ import { useState } from "react";
 import { removeCard, setCardFavorite } from "@/server/supabase/actionsDB";
 import { useRouter } from "next/navigation";
 import { NameToUpper } from "@/utils/helpers";
-import { decryptCardData } from "@/crypto/cipher";
+import { decipherData } from "@/crypto/cipher";
 interface Props {
   data: Tables<"Cards">;
 }
 export default function CardTile({ data }: Props) {
   const {
-    favorite,
-    card_name,
-    id,
-    password,
     at_folder,
+    card_name,
+    favorite,
+    id,
+    is_password,
     link,
     login,
     notes,
-    is_password,
-  } = decryptCardData(data);
+    password,
+  } = decipherData("card", data);
   const [showPass, setShowPass] = useState<boolean>(false);
   const [showMore, setShowMore] = useState<boolean>(false);
   const router = useRouter();
@@ -65,7 +65,7 @@ export default function CardTile({ data }: Props) {
             />
             <ContextMenu
               onDelete={async () => await removeCard(id)}
-              onEdit={() => router.push(`./${at_folder}/editPassCard/${id}`)}
+              onEdit={() => router.push(`./${at_folder}/edit/${id}`)}
               className="mr-4"
             />
           </div>

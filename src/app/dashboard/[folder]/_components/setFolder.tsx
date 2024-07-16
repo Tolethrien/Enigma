@@ -1,26 +1,22 @@
 "use client";
-import Input from "@/app/components/input";
+import Input from "@/app/_components/input";
 import TemplateTile from "./templateTile";
 import CompantyLogo from "./companyLogo";
 import ColorIcon, { avalibleIconColors } from "./colorIcon";
-import logos, { type Logos } from "@/app/logos";
+import logos, { type Logos } from "@/utils/logos";
 import React, { useState } from "react";
 import { NameToUpper } from "@/utils/helpers";
 import { AddFolderIconTypes } from "@/types/types";
 import { addFolder, editFolder } from "@/server/supabase/actionsDB";
 import { Tables } from "@/types/database";
 import Link from "next/link";
-import {
-  cryptAddFolderData,
-  cryptEditFolderData,
-  decryptFolderData,
-} from "@/crypto/cipher";
+import { cipherData, decipherData } from "@/crypto/cipher";
 
 type Props = { type: "add" } | { type: "edit"; data: Tables<"Folder"> };
 
 export default function SetFolder(props: Props) {
   const data =
-    props.type === "edit" ? decryptFolderData(props.data) : undefined;
+    props.type === "edit" ? decipherData("folder", props.data) : undefined;
   const [companyName, setCompanyName] = useState<string>(
     data?.folder_name ?? "",
   );
@@ -31,18 +27,17 @@ export default function SetFolder(props: Props) {
   );
   const [error, setError] = useState<string>("");
   const confirmData = async () => {
-    if (props.type === "add")
+    if (props.type === "add") {
       await addFolder(
-        cryptAddFolderData({
-          custome_sort_order: 0,
+        cipherData("AddFolder", {
           folder_name: companyName,
           hashtag: hashtag,
           icon_name: pickedLogo,
         }),
       );
-    else if (props.type === "edit") {
+    } else if (props.type === "edit") {
       await editFolder(
-        cryptEditFolderData({
+        cipherData("editFolder", {
           id: props.data.id,
           folder_name: companyName,
           hashtag: hashtag,

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { loadImage, readBadge } from "@/crypto/stegano";
@@ -10,7 +10,7 @@ interface Props {
 export default function Badge({ id }: Props) {
   const localStore = getLocalStorage();
   const router = useRouter();
-  const [badge, setBadge] = useState(localStore?.getItem(`badge-${id}`) ?? "");
+  const badge = localStore?.getItem(`badge-${id}`);
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const sessStore = getSessionStorage();
     const file = e.target.files?.[0];
@@ -24,7 +24,7 @@ export default function Badge({ id }: Props) {
       const { iv, key } = readBadge(img);
       sessStore?.setItem("enigmaKey", key);
       sessStore?.setItem("enigmaIv", iv);
-      setBadge(base64);
+      router.refresh();
     };
   };
 

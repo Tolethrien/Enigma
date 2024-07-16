@@ -1,6 +1,6 @@
 import { getCardData, getFolderData } from "@/server/supabase/actionsDB";
-import SetPassCard from "../../components/setPassCard";
-import FolderTitle from "../../components/folderTitle";
+import SetPassCard from "../../_components/setPassCard";
+import FolderTitle from "../../_components/folderTitle";
 
 export default async function PassCardEdit({
   params,

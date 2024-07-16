@@ -1,8 +1,8 @@
 import { getAllCards, getFolderData } from "@/server/supabase/actionsDB";
-import CardTile from "./components/cardTile";
-import ScrollableContent from "@/app/components/scrollContent";
-import FolderTitle from "./components/folderTitle";
-import AddNewButton from "./components/addNewButton";
+import CardTile from "./_components/cardTile";
+import ScrollableContent from "@/app/_components/scrollContent";
+import FolderTitle from "./_components/folderTitle";
+import AddNewButton from "./_components/addNewButton";
 
 export default async function Folder({
   params,

@@ -63,6 +63,7 @@ export function decodeImage(imageData: ImageData) {
   let numbersToHex: number[] = [];
   const offscreenCtx = new OffscreenCanvas(GRID_SIZE, GRID_SIZE).getContext(
     "2d",
+    { willReadFrequently: true },
   )!;
   offscreenCtx.putImageData(imageData, 0, 0);
   Array(NUMBER_OF_CELLS)

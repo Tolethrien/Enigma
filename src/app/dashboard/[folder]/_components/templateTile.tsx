@@ -1,6 +1,6 @@
 import { NameToUpper } from "@/utils/helpers";
 import { AddFolderIconTypes } from "@/types/types";
-import GeneratedFolderIcon from "@/app/components/generatedIcon";
+import GeneratedFolderIcon from "@/app/_components/generatedIcon";
 interface Props {
   name: string;
   icon: AddFolderIconTypes;

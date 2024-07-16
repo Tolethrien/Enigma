@@ -1,4 +1,4 @@
-import Input from "@/app/components/input";
+import Input from "@/app/_components/input";
 import { sendPasswordReset } from "@/server/supabase/actionsUser";
 import { getUserData } from "@/server/supabase/back";
 import Link from "next/link";

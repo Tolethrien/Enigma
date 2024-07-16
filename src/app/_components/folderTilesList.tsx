@@ -1,17 +1,22 @@
 "use client";
 import { Tables } from "@/types/database";
-import AddTile from "../dashboard/component/addTile";
-import FolderTile from "../dashboard/component/folderTile";
+import AddTile from "../dashboard/_component/addTile";
+import FolderTile from "../dashboard/_component/folderTile";
 import ScrollableContent from "./scrollContent";
 import Input from "./input";
-import { useState } from "react";
-import { decryptAllFolderData } from "@/crypto/cipher";
+import { useEffect, useState } from "react";
+import { decipherData } from "@/crypto/cipher";
 interface Props {
   data: Tables<"Folder">[];
 }
 export default function FolderTilesList({ data }: Props) {
   const [search, setSearch] = useState<string>("");
-  const decryptedData = decryptAllFolderData(data);
+  const [decryptedData, setdecryptedData] = useState<
+    Omit<Tables<"Folder">, "user_id">[]
+  >([]);
+  useEffect(() => {
+    setdecryptedData(data.map((folder) => decipherData("folder", folder)));
+  }, [data]);
   return (
     <>
       <form>

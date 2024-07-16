@@ -1,6 +1,6 @@
 import { getUserData } from "@/server/supabase/back";
 import { redirect } from "next/navigation";
-import Input from "@/app/components/input";
+import Input from "@/app/_components/input";
 import { signup } from "@/server/supabase/actionsUser";
 import Link from "next/link";
 

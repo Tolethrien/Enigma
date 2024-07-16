@@ -1,6 +1,5 @@
 "use client";
-
-import Input from "@/app/components/input";
+import Input from "@/app/_components/input";
 import Image from "next/image";
 import unfold from "@/app/assets/unfold.svg";
 import log from "@/app/assets/log.svg";
@@ -10,18 +9,15 @@ import { addCard, editCard } from "@/server/supabase/actionsDB";
 import { useRef, useState } from "react";
 import { Tables } from "@/types/database";
 import { NameToUpper } from "@/utils/helpers";
-import {
-  cryptAddCardData,
-  cryptEditCardData,
-  decryptCardData,
-} from "@/crypto/cipher";
 import { generateStrongPassword } from "@/crypto/generatePassword";
+import { cipherData, decipherData } from "@/crypto/cipher";
 type SetPassCardProps =
   | { type: "add"; folderID: number }
   | { type: "edit"; data: Tables<"Cards"> };
 
 export default function SetPassCard(props: SetPassCardProps) {
-  const data = props.type === "edit" ? decryptCardData(props.data) : undefined;
+  const data =
+    props.type === "edit" ? decipherData("card", props.data) : undefined;
   const [pass, setPass] = useState<string>(data?.password ?? "");
   const [notes, setNotes] = useState<string>(data?.notes ?? "");
   const [cardName, setCardName] = useState<string>(data?.card_name ?? "");
@@ -56,7 +52,7 @@ export default function SetPassCard(props: SetPassCardProps) {
   const confirmData = async () => {
     if (props.type === "add")
       await addCard(
-        cryptAddCardData({
+        cipherData("addCard", {
           at_folder: props.folderID,
           card_name: cardName,
           login,
@@ -68,7 +64,7 @@ export default function SetPassCard(props: SetPassCardProps) {
       );
     else if (props.type === "edit") {
       await editCard(
-        cryptEditCardData({
+        cipherData("editCard", {
           id: props.data.id,
           at_folder: props.data.at_folder,
           card_name: cardName,

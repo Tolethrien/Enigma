@@ -1,10 +1,10 @@
 import { NameToUpper } from "@/utils/helpers";
-import logos, { Logos } from "../logos";
+import logos, { Logos } from "../../utils/logos";
 import Image from "next/image";
 import {
   AvalibleIconColorsT,
   COLORS,
-} from "../dashboard/[folder]/components/colorIcon";
+} from "../dashboard/[folder]/_components/colorIcon";
 export default function GeneratedFolderIcon({
   folderIcon,
   folderName,

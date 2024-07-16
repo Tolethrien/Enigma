@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
-import GeneratedFolderIcon from "@/app/components/generatedIcon";
+import GeneratedFolderIcon from "@/app/_components/generatedIcon";
 import { Tables } from "@/types/database";
-import { decryptFolderData } from "@/crypto/cipher";
 import AddNewButton from "./addNewButton";
+import { decipherData } from "@/crypto/cipher";
 interface Props {
   data: Omit<Tables<"Folder">, "user_id">;
   withButton?: boolean;
@@ -14,8 +14,7 @@ export default function FolderTitle({
   closePath,
   withButton = true,
 }: Props) {
-  const { folder_name, icon_name, hashtag } = decryptFolderData(data);
-
+  const { folder_name, icon_name, hashtag } = decipherData("folder", data);
   return (
     <>
       <div className="flex flex-col px-6">

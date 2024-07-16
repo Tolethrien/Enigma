@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import GeneratedFolderIcon from "@/app/components/generatedIcon";
-import ContextMenu from "@/app/components/contextMenu";
+import GeneratedFolderIcon from "@/app/_components/generatedIcon";
+import ContextMenu from "@/app/_components/contextMenu";
 import { removeFolder } from "@/server/supabase/actionsDB";
 import { Tables } from "@/types/database";
 interface Props {
@@ -20,7 +20,7 @@ export default function FolderTile({
     >
       <div className="flex h-1/5 items-center justify-center self-end ">
         <ContextMenu
-          onEdit={() => router.push(`./dashboard/editFolder/${id}`)}
+          onEdit={() => router.push(`./dashboard/edit/${id}`)}
           onDelete={async () => await removeFolder(id)}
         />
       </div>

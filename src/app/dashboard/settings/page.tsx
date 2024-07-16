@@ -1,6 +1,6 @@
 import OptionSlot from "./_components/optionSlot";
 import Modal from "./_components/modal";
-import ScrollableContent from "@/app/components/scrollContent";
+import ScrollableContent from "@/app/_components/scrollContent";
 import Link from "next/link";
 import { getUserData } from "@/server/supabase/back";
 import { deleteUser } from "@/server/supabase/actionsUser";

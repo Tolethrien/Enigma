@@ -1,5 +1,5 @@
 import { getFolderData } from "@/server/supabase/actionsDB";
-import SetFolder from "../../[folder]/components/setFolder";
+import SetFolder from "../../[folder]/_components/setFolder";
 
 export default async function EditFolder({
   params,
