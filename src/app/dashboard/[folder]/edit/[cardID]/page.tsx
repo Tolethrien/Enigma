@@ -2,7 +2,7 @@ import { getCardData, getFolderData } from "@/server/supabase/actionsDB";
 import SetPassCard from "../../_components/setPassCard";
 import FolderTitle from "../../_components/folderTitle";
 
-export default async function PassCardEdit({
+export default async function EditPassCard({
   params,
 }: {
   params: { cardID: number; folder: number };

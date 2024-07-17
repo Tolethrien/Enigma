@@ -21,11 +21,11 @@ export default function GeneratedFolderIcon({
         <Image
           src={logos[folderIcon as Logos]}
           alt="logo"
-          className={`flex h-1/2 w-1/2  shadow-iconImgShadow ${className}`}
+          className={`flex h-1/2 w-1/2 flex-grow-0  shadow-iconImgShadow ${className}`}
         ></Image>
       ) : (
         <div
-          className={`flex h-1/2 w-1/2 shadow-iconImgShadow ${COLORS[folderIcon as AvalibleIconColorsT]?.bg ?? "bg-red-300"} ${className} items-center justify-center text-4xl`}
+          className={`flex h-1/2 w-1/2 flex-grow-0 shadow-iconImgShadow ${COLORS[folderIcon as AvalibleIconColorsT]?.bg ?? "bg-red-300"} ${className} items-center justify-center text-4xl`}
         >
           {NameToUpper(folderName.charAt(0))}
         </div>

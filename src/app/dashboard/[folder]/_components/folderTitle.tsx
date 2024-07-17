@@ -17,10 +17,12 @@ export default function FolderTitle({
   const { folder_name, icon_name, hashtag } = decipherData("folder", data);
   return (
     <>
-      <div className="flex flex-col px-6">
+      <div className="flex w-full flex-col px-6">
         <div className="flex w-full justify-between">
-          <div className="flex items-center justify-center gap-4">
-            <h2 className="text-3xl">{folder_name}</h2>
+          <div className="flex w-full items-center justify-start gap-4">
+            <h2 className="max-w-[60%] overflow-hidden text-ellipsis text-nowrap text-3xl">
+              {folder_name}
+            </h2>
             <GeneratedFolderIcon
               folderIcon={icon_name}
               folderName={folder_name}
@@ -31,9 +33,9 @@ export default function FolderTitle({
             X
           </Link>
         </div>
-        <div className={`flex ${withButton && "py-2 "}`}>
+        <div className={`flex w-full ${withButton && "justify-between py-2"}`}>
           <p
-            className={`${withButton ? "-mt-3" : "pb-2"} flex flex-grow items-start text-gray-300`}
+            className={`${withButton ? "-mt-3" : "pb-2"} max-w-[40%]  overflow-hidden text-ellipsis text-nowrap text-gray-300`}
           >
             #{hashtag}
           </p>

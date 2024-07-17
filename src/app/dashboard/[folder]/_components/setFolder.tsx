@@ -25,7 +25,6 @@ export default function SetFolder(props: Props) {
   const [pickedLogo, setpickedLogo] = useState<AddFolderIconTypes>(
     (data?.icon_name as AddFolderIconTypes | undefined) ?? "red",
   );
-  const [error, setError] = useState<string>("");
   const confirmData = async () => {
     if (props.type === "add") {
       await addFolder(

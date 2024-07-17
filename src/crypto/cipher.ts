@@ -105,20 +105,24 @@ export function generateCreds() {
 }
 export function cipher(text: string) {
   if (!haveCreds()) return text;
+  const session = getSessionStorage();
+  if (!session) return;
   const cipher = createCipheriv(
     "aes256",
-    Buffer.from(sessionStorage.getItem("enigmaKey")!, "hex"),
-    Buffer.from(sessionStorage.getItem("enigmaIv")!, "hex"),
+    Buffer.from(session.getItem("enigmaKey")!, "hex"),
+    Buffer.from(session.getItem("enigmaIv")!, "hex"),
   );
   //TODO: nie pozwol tego robic jak nie masz odkodowanych wiadomosci
   return cipher.update(text, "utf-8", "hex") + cipher.final("hex");
 }
 export function decipher(text: string) {
   if (!haveCreds()) return text;
+  const session = getSessionStorage();
+  if (!session) return;
   const decipher = createDecipheriv(
     "aes256",
-    Buffer.from(sessionStorage.getItem("enigmaKey")!, "hex"),
-    Buffer.from(sessionStorage.getItem("enigmaIv")!, "hex"),
+    Buffer.from(session.getItem("enigmaKey")!, "hex"),
+    Buffer.from(session.getItem("enigmaIv")!, "hex"),
   );
   try {
     return decipher.update(text, "hex", "utf-8") + decipher.final("utf-8");
