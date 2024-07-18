@@ -93,7 +93,9 @@ export default function SetFolder(props: Props) {
                 type="text"
                 className="ml-4"
               />
-              <p className="mr-4">{NameToUpper(pickedLogo)}</p>
+              <p className="mr-4 max-w-[40%] overflow-hidden text-ellipsis text-nowrap">
+                {NameToUpper(pickedLogo)}
+              </p>
             </div>
             <div className="grid w-4/5 grid-cols-5 items-center justify-center gap-2">
               {Object.keys(logos)

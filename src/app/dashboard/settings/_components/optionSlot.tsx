@@ -13,7 +13,7 @@ export default function OptionSlot({ param, optionName, optionValue }: Props) {
       <p className="w-[35%]">{optionName}</p>
       <p className="flex-grow">{optionValue}</p>
       <Link
-        href={{ pathname: "", query: { option: param } }}
+        href={`./settings/${param}`}
         className="flex items-center justify-center"
       >
         <Image src={menuIco} alt="options" />

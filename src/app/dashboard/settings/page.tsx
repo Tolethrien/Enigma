@@ -1,12 +1,9 @@
 import OptionSlot from "./_components/optionSlot";
-import Modal from "./_components/modal";
 import ScrollableContent from "@/app/_components/scrollContent";
 import Link from "next/link";
 import { getUserData } from "@/server/supabase/back";
 import { deleteUser } from "@/server/supabase/actionsUser";
 import Badge from "./_components/badge";
-import { use } from "react";
-import { assert } from "console";
 import { assertion } from "@/utils/helpers";
 import ClearBadge from "./_components/clearBadge";
 export type ParamType =
@@ -20,14 +17,13 @@ export type ParamType =
 interface Props {
   searchParams: { option: ParamType };
 }
-export default async function UserSettings({ searchParams }: Props) {
+export default async function UserSettings() {
   const { meta, user } = await getUserData();
   const id = user?.id;
   assertion(id);
   if (!meta) return <div>something went wrong...</div>;
   return (
     <>
-      {searchParams.option && <Modal modalType={searchParams.option} />}
       <div className="flex justify-between px-4 pb-8 pt-4">
         <h2 className="w-full text-center text-2xl">Options</h2>
         <Link href="/dashboard" className="text-2xl">
@@ -54,11 +50,11 @@ export default async function UserSettings({ searchParams }: Props) {
             param={"password"}
           />
 
-          <OptionSlot
+          {/* <OptionSlot
             optionName="Avatar"
             optionValue="ava.png"
             param={"avatar"}
-          />
+          /> */}
         </div>
         {/* persona */}
         <div className="w-full px-4">

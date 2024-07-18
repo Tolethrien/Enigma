@@ -50,6 +50,7 @@ export default function SetPassCard(props: SetPassCardProps) {
   };
 
   const confirmData = async () => {
+    //TODO: sprawdz czy istnieje klucz w session jesli nie, nie pozwol zapisac a wywal error
     if (props.type === "add")
       await addCard(
         cipherData("addCard", {

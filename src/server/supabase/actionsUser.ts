@@ -23,6 +23,8 @@ export const updateUserName = async (formData: FormData) => {
     data: { display_name: data.name },
   });
   if (error) throw new Error(error.message);
+  revalidatePath("/", "layout");
+  redirect("/dashboard/settings");
 };
 
 export async function login(formData: FormData) {
@@ -56,9 +58,11 @@ export async function sendPasswordReset(formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  // redirect("/login");
+  redirect("/dashboard/settings");
 }
 export async function setNewPassword(formData: FormData) {
+  //TODO: nie dziala resetowanie
+  //TODO: zrobic strone do resetowania lepiej
   const supabase = createServerClient();
   const form = {
     password: formData.get("password") as string,

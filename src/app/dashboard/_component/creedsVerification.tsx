@@ -7,13 +7,8 @@ import { useEffect } from "react";
 interface Props {
   children: React.ReactNode;
 }
-interface AppProvider {}
-// zmienic na layout dashbordu nie apki calej
-
-// export const AppContext = createContext<AppProvider>({});
 export default function CreedsVerification({ children }: Props) {
   const router = useRouter();
-
   useEffect(() => {
     const getCreds = async () => {
       const sessStore = getSessionStorage();
