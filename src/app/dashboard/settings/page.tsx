@@ -2,21 +2,11 @@ import OptionSlot from "./_components/optionSlot";
 import ScrollableContent from "@/app/_components/scrollContent";
 import Link from "next/link";
 import { getUserData } from "@/server/supabase/back";
-import { deleteUser } from "@/server/supabase/actionsUser";
 import Badge from "./_components/badge";
 import { assertion } from "@/utils/helpers";
 import ClearBadge from "./_components/clearBadge";
-export type ParamType =
-  | "name"
-  | "email"
-  | "stegano"
-  | "password"
-  | "avatar"
-  | "delete"
-  | "upload";
-interface Props {
-  searchParams: { option: ParamType };
-}
+import DeleteAccount from "./_components/deleteAcc";
+
 export default async function UserSettings() {
   const { meta, user } = await getUserData();
   const id = user?.id;
@@ -74,13 +64,9 @@ export default async function UserSettings() {
           <Badge id={id} />
         </div>
         {/* Denger zone */}
-        <div className="w-full px-4 text-center *:py-2">
-          <p className="w-full border-b text-2xl">Danger Zone</p>
-          <form>
-            <button formAction={deleteUser} className="text-xl text-red-700">
-              Delete Account
-            </button>
-          </form>
+        <div className="flex w-full flex-col px-4 text-center *:py-2">
+          <p className="mb-2 w-full border-b text-2xl">Danger Zone</p>
+          <DeleteAccount id={id} />
           <ClearBadge id={id} />
         </div>
       </ScrollableContent>

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import OptionTitle from "../_components/optionTitle";
 import ScrollableContent from "@/app/_components/scrollContent";
 import { updateUserName } from "@/server/supabase/actionsUser";

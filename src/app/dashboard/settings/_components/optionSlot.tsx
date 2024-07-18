@@ -1,11 +1,18 @@
 import Image from "next/image";
 import menuIco from "@/app/assets/menuIco.svg";
 import Link from "next/link";
-import { ParamType } from "../page";
+
 interface Props {
   optionName: string;
   optionValue: string;
-  param: ParamType;
+  param:
+    | "name"
+    | "email"
+    | "stegano"
+    | "password"
+    | "avatar"
+    | "delete"
+    | "upload";
 }
 export default function OptionSlot({ param, optionName, optionValue }: Props) {
   return (
