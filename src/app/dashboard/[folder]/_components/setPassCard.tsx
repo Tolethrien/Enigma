@@ -1,10 +1,10 @@
 "use client";
 import Input from "@/app/_components/input";
 import Image from "next/image";
-import unfold from "@/app/assets/unfold.svg";
-import log from "@/app/assets/log.svg";
-import lock from "@/app/assets/lock.svg";
-import dice from "@/app/assets/dice.svg";
+import unfold from "@/app/_assets/unfold.svg";
+import log from "@/app/_assets/log.svg";
+import lock from "@/app/_assets/lock.svg";
+import dice from "@/app/_assets/dice.svg";
 import { addCard, editCard } from "@/server/supabase/actionsDB";
 import { useRef, useState } from "react";
 import { Tables } from "@/types/database";

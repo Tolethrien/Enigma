@@ -1,5 +1,6 @@
 "use client";
 
+import Dialog from "@/app/_components/dialog";
 import { getLocalStorage, getSessionStorage } from "@/utils/helpers";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -26,7 +27,7 @@ export default function ClearBadge({ id }: Props) {
         Clear Badge
       </button>
       {open && (
-        <dialog className="fixed left-0 top-0 z-50 flex h-full w-full flex-col items-center justify-center overflow-auto bg-black bg-opacity-50 px-6 backdrop-blur">
+        <Dialog>
           <div className="flex w-full justify-end px-4 pb-8 pt-4">
             <button
               className="text-2xl text-slate-50"
@@ -56,7 +57,7 @@ export default function ClearBadge({ id }: Props) {
               Clear!
             </button>
           </div>
-        </dialog>
+        </Dialog>
       )}
     </>
   );

@@ -7,7 +7,7 @@ import Input from "./input";
 import { useEffect, useState } from "react";
 import { decipherData } from "@/crypto/cipher";
 import Link from "next/link";
-import plusIco from "@/app/assets/plusIco.svg";
+import plusIco from "@/app/_assets/plusIco.svg";
 interface Props {
   data: Tables<"Folder">[];
 }

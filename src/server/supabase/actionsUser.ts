@@ -68,13 +68,14 @@ export async function setNewPassword(formData: FormData) {
     password: formData.get("password") as string,
     code: formData.get("code") as string,
   };
+  console.log("resetowanie DB", form.code);
   const { error: exchangeErr } = await supabase.auth.exchangeCodeForSession(
     form.code,
   );
   if (exchangeErr) console.log("error z logowania Otp", exchangeErr.message);
 
   const { error } = await supabase.auth.updateUser({ password: form.password });
-  if (error) console.log(error.message);
+  if (error) console.log("reset update user err", error.message);
   await supabase.auth.signOut();
   redirect("/auth/login");
 }

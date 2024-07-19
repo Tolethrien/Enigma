@@ -1,5 +1,5 @@
 import Image from "next/image";
-import menuIco from "@/app/assets/menuIco.svg";
+import menuIco from "@/app/_assets/menuIco.svg";
 import Link from "next/link";
 
 interface Props {

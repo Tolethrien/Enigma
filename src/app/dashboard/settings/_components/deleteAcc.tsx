@@ -1,5 +1,6 @@
 "use client";
 
+import Dialog from "@/app/_components/dialog";
 import { deleteUser } from "@/server/supabase/actionsUser";
 import { getLocalStorage, getSessionStorage } from "@/utils/helpers";
 import { useState } from "react";
@@ -34,7 +35,7 @@ export default function DeleteAccount({ id }: Props) {
         Delete Account
       </button>
       {open && (
-        <dialog className="fixed left-0 top-0 z-50 flex h-full w-full flex-col items-center justify-center overflow-auto bg-black bg-opacity-50 px-6 backdrop-blur">
+        <Dialog>
           <div className="flex w-full justify-end px-4 pb-8 pt-4">
             <button className="text-2xl text-slate-50" onClick={clearDialog}>
               X
@@ -70,7 +71,7 @@ export default function DeleteAccount({ id }: Props) {
               Delete!
             </button>
           </div>
-        </dialog>
+        </Dialog>
       )}
     </>
   );

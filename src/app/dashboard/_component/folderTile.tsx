@@ -5,6 +5,7 @@ import GeneratedFolderIcon from "@/app/_components/generatedIcon";
 import ContextMenu from "@/app/_components/contextMenu";
 import { removeFolder } from "@/server/supabase/actionsDB";
 import { Tables } from "@/types/database";
+import { NameToUpper } from "@/utils/helpers";
 interface Props {
   data: Omit<Tables<"Folder">, "user_id">;
 }
@@ -22,12 +23,13 @@ export default function FolderTile({
         <ContextMenu
           onEdit={() => router.push(`./dashboard/edit/${id}`)}
           onDelete={async () => await removeFolder(id)}
+          name={NameToUpper(folder_name)}
         />
       </div>
       <GeneratedFolderIcon folderIcon={icon_name} folderName={folder_name} />
       <div className="flex h-[30%] w-full items-center justify-center px-1  text-white">
         <p className="overflow-hidden text-ellipsis text-nowrap">
-          {folder_name}
+          {NameToUpper(folder_name)}
         </p>
       </div>
     </Link>

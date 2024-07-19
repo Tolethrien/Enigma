@@ -6,6 +6,7 @@ export default async function NewPass({
 }: {
   searchParams: { code: string };
 }) {
+  console.log("params", searchParams.code);
   return (
     <div className="grid w-4/5 flex-grow grid-flow-row grid-rows-3 place-items-center text-xl text-white sm:w-96">
       <h1 className="text-center text-5xl">Enigma</h1>
@@ -17,7 +18,7 @@ export default async function NewPass({
             defaultValue={searchParams.code}
             formID="code"
             required
-            className="hidden"
+            className=""
           ></Input>
           <Input
             placeholder="new password"

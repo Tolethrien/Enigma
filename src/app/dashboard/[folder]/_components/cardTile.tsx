@@ -1,15 +1,15 @@
 "use client";
 import Image from "next/image";
-import starDark from "@/app/assets/notFavorite.svg";
-import starLight from "@/app/assets/favorite.svg";
-import dateValid from "@/app/assets/passValid.svg";
+import starDark from "@/app/_assets/notFavorite.svg";
+import starLight from "@/app/_assets/favorite.svg";
+import dateValid from "@/app/_assets/passValid.svg";
 import ContextMenu from "@/app/_components/contextMenu";
-import copyIco from "@/app/assets/copy.svg";
-import log from "@/app/assets/log.svg";
-import lock from "@/app/assets/lock.svg";
-import unfold from "@/app/assets/unfold.svg";
-import passwordHidden from "@/app/assets/passHide.svg";
-import passwordVisible from "@/app/assets/passShow.svg";
+import copyIco from "@/app/_assets/copy.svg";
+import log from "@/app/_assets/log.svg";
+import lock from "@/app/_assets/lock.svg";
+import unfold from "@/app/_assets/unfold.svg";
+import passwordHidden from "@/app/_assets/passHide.svg";
+import passwordVisible from "@/app/_assets/passShow.svg";
 import { Tables } from "@/types/database";
 import { useState } from "react";
 import { removeCard, setCardFavorite } from "@/server/supabase/actionsDB";
@@ -67,6 +67,7 @@ export default function CardTile({ data }: Props) {
               onDelete={async () => await removeCard(id)}
               onEdit={() => router.push(`./${at_folder}/edit/${id}`)}
               className="mr-4"
+              name={NameToUpper(card_name)}
             />
           </div>
         </div>
