@@ -15,7 +15,7 @@ export default async function ChangeEmail() {
         <div className="h-full w-full py-6">
           <form className="flex h-full flex-col items-center  gap-6">
             <p className="text-2xl text-slate-300">Currenty your email is:</p>
-            <p className="text-3xl">{NameToUpper(meta.email)}</p>
+            <p className="text-3xl">{meta.email}</p>
             <p className="text-2xl text-slate-300">
               what email you want to use from now?
             </p>

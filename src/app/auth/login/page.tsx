@@ -4,14 +4,24 @@ import Link from "next/link";
 import Input from "@/app/_components/input";
 import { login } from "@/server/supabase/actionsUser";
 
-export default async function Login() {
+export default async function Login({
+  searchParams,
+}: {
+  searchParams: { invalid: "true" };
+}) {
   const { user } = await getUserData();
   if (user) redirect("/dashboard");
+  console.log(searchParams);
   return (
     <div className="flex h-full flex-col">
       <h1 className="my-[8vh] text-center text-5xl">Enigma</h1>
       <div className="mt-[10vh] flex w-full flex-grow flex-col items-center gap-8">
-        <form className="flex flex-col gap-8 *:text-2xl *:placeholder:text-lg">
+        <form className=" relative flex flex-col gap-8 *:text-2xl *:placeholder:text-lg">
+          {searchParams.invalid && (
+            <p className="absolute -top-10 left-1/2 w-full -translate-x-1/2 text-nowrap text-2xl text-red-700">
+              Invalid login credentials
+            </p>
+          )}
           <Input
             placeholder="Email"
             type="email"

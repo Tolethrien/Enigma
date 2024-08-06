@@ -8,8 +8,8 @@ export default async function NewPass({
 }) {
   console.log("params", searchParams.code);
   return (
-    <div className="grid w-4/5 flex-grow grid-flow-row grid-rows-3 place-items-center text-xl text-white sm:w-96">
-      <h1 className="text-center text-5xl">Enigma</h1>
+    <div className="flex-grow text-xl text-white">
+      <h1 className="py-16 text-center text-5xl">Enigma</h1>
       <div className="grid">
         <form className="flex w-full flex-col items-center gap-8">
           <Input
@@ -18,7 +18,7 @@ export default async function NewPass({
             defaultValue={searchParams.code}
             formID="code"
             required
-            className=""
+            className="hidden"
           ></Input>
           <Input
             placeholder="new password"

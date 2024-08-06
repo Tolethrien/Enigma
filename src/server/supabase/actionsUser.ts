@@ -7,7 +7,6 @@ export const updateUserEmail = async (formData: FormData) => {
   const data = {
     email: formData.get("name") as string,
   };
-  console.log(data.email);
   const supabase = createServerClient();
   const { error } = await supabase.auth.updateUser({
     email: data.email,
@@ -37,8 +36,12 @@ export async function login(formData: FormData) {
   const { error } = await supabase.auth.signInWithPassword(data);
 
   if (error) {
-    console.log(error);
-    redirect("./error");
+    if (error.message === "Invalid login credentials") {
+      redirect("./login?invalid=true");
+    } else {
+      console.log("error to: ", error.message);
+      redirect("./error");
+    }
   }
 
   revalidatePath("/", "layout");
@@ -61,19 +64,18 @@ export async function sendPasswordReset(formData: FormData) {
   redirect("/dashboard/settings");
 }
 export async function setNewPassword(formData: FormData) {
-  //TODO: nie dziala resetowanie
+  //TODO: resetowanie dziala tylko z tej samej przegladarki
   //TODO: zrobic strone do resetowania lepiej
   const supabase = createServerClient();
   const form = {
     password: formData.get("password") as string,
     code: formData.get("code") as string,
   };
-  console.log("resetowanie DB", form.code);
-  const { error: exchangeErr } = await supabase.auth.exchangeCodeForSession(
-    form.code,
-  );
-  if (exchangeErr) console.log("error z logowania Otp", exchangeErr.message);
-
+  try {
+    await supabase.auth.exchangeCodeForSession(form.code);
+  } catch (error) {
+    console.log("error z logowania Otp", error);
+  }
   const { error } = await supabase.auth.updateUser({ password: form.password });
   if (error) console.log("reset update user err", error.message);
   await supabase.auth.signOut();
@@ -93,8 +95,8 @@ export async function signup(formData: FormData) {
     options: { data: { display_name: data.name, email: data.email } },
   });
   if (error) {
-    console.log(error);
-    redirect("./error");
+    console.log("error to", error);
+    redirect("./register?invalid=true");
   }
 
   revalidatePath("/", "layout");

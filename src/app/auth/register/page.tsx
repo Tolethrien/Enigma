@@ -4,9 +4,13 @@ import Input from "@/app/_components/input";
 import { signup } from "@/server/supabase/actionsUser";
 import Link from "next/link";
 
-export default async function Register() {
+export default async function Register({
+  searchParams,
+}: {
+  searchParams: { invalid: "true" };
+}) {
   const { user } = await getUserData();
-
+  console.log(searchParams);
   if (user) redirect("/dashboard");
 
   return (
@@ -32,6 +36,12 @@ export default async function Register() {
           <Input placeholder="name" type="text" formID="name" required></Input>
           <button formAction={signup}>Start!</button>
         </form>
+        {searchParams.invalid && (
+          <p className=" w-3/4 text-center text-xl text-red-700">
+            The password must be at least 8 characters long, lowercase and
+            uppercase letters and include a digit and a special character.
+          </p>
+        )}
       </div>
     </div>
   );
