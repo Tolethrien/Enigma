@@ -9,8 +9,10 @@ export default async function ChangeName() {
   const { meta } = await getUserData();
   assertion(meta);
   return (
-    <div className="flex flex-grow flex-col">
-      <OptionTitle title="Change Name" />
+    <>
+      <div className="flex flex-col">
+        <OptionTitle title="Change Name" />
+      </div>
       <ScrollableContent>
         <div className="h-full w-full py-6">
           <form className="flex h-full flex-col items-center  gap-6">
@@ -36,6 +38,6 @@ export default async function ChangeName() {
           </form>
         </div>
       </ScrollableContent>
-    </div>
+    </>
   );
 }

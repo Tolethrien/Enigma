@@ -4,36 +4,42 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { GetUserID } from "@/server/supabase/clientUser";
 import { generateCreds } from "@/crypto/cipher";
 import { getLocalStorage, saveBadge } from "@/utils/helpers";
+import { GetUserID } from "@/server/supabase/clientUser";
+
+type BadgeState = "unverified" | "haveBadge" | "needBadge";
 export default function GeneratedBadge() {
   const localStore = getLocalStorage();
   const [data, setData] = useState<string>("");
-  const [badge] = useState<boolean>(
-    localStore?.getItem("badge") ? true : false,
-  );
+  const [badgeState, setBadgeState] = useState<BadgeState>("unverified");
+
   const route = useRouter();
   const { iv, key } = generateCreds();
 
   useEffect(() => {
+    //NOTE: reactStrictMode renders this 2 times so it not work as it should on dev mode but it works on prod
     const createBadge = async () => {
-      if (badge) {
+      const userID = await GetUserID();
+      const haveBadge = localStore?.getItem(`badge-${userID}`) ? true : false;
+      if (haveBadge) {
+        setBadgeState("haveBadge");
         route.push("/dashboard");
       } else {
         const data = await generateBadge({ key, iv });
-        const id = await GetUserID();
+        localStore?.setItem(`badge-${userID}`, data);
         setData(data);
-        localStore?.setItem(`badge-${id}`, data);
+        setBadgeState("needBadge");
       }
     };
-
     createBadge();
   }, []);
 
+  if (badgeState === "unverified")
+    return <p className=" text-2xl">verifying</p>;
   return (
     <>
-      {badge ? (
+      {badgeState === "haveBadge" ? (
         <>
           <p className="text-2xl">Redirecting...</p>
           <p className="text-xl">Badge already generated</p>
