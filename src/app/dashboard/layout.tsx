@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { getUserData } from "@/server/supabase/back";
+import { getUserData } from "@/supabase/back";
 import NavBar from "./_component/navbar";
 import CreedsVerification from "./_component/creedsVerification";
 

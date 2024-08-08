@@ -1,7 +1,7 @@
 "use client";
 
 import Dialog from "@/app/_components/dialog";
-import { deleteUser } from "@/server/supabase/actionsUser";
+import { deleteUser } from "@/supabase/actionsUser";
 import { getLocalStorage, getSessionStorage } from "@/utils/helpers";
 import { useState } from "react";
 

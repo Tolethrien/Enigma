@@ -7,7 +7,7 @@ import logos, { type Logos } from "@/utils/logos";
 import React, { useState } from "react";
 import { NameToUpper } from "@/utils/helpers";
 import { AddFolderIconTypes } from "@/types/types";
-import { addFolder, editFolder } from "@/server/supabase/actionsDB";
+import { addFolder, editFolder } from "@/supabase/actionsDB";
 import { Tables } from "@/types/database";
 import Link from "next/link";
 import { cipherData, decipherData } from "@/crypto/cipher";

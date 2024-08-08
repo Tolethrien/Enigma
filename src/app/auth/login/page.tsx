@@ -1,8 +1,8 @@
-import { getUserData } from "@/server/supabase/back";
+import { getUserData } from "@/supabase/back";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import Input from "@/app/_components/input";
-import { login } from "@/server/supabase/actionsUser";
+import { login } from "@/supabase/actionsUser";
 
 export default async function Login({
   searchParams,
@@ -11,7 +11,6 @@ export default async function Login({
 }) {
   const { user } = await getUserData();
   if (user) redirect("/dashboard");
-  console.log(searchParams);
   return (
     <div className="flex h-full flex-col">
       <h1 className="my-[8vh] text-center text-5xl">Enigma</h1>

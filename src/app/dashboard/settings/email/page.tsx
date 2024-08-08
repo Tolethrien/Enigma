@@ -1,9 +1,9 @@
 import OptionTitle from "../_components/optionTitle";
 import ScrollableContent from "@/app/_components/scrollContent";
-import { updateUserEmail } from "@/server/supabase/actionsUser";
+import { updateUserEmail } from "@/supabase/actionsUser";
 import { assertion, NameToUpper } from "@/utils/helpers";
 import Input from "@/app/_components/input";
-import { getUserData } from "@/server/supabase/back";
+import { getUserData } from "@/supabase/back";
 
 export default async function ChangeEmail() {
   const { meta } = await getUserData();

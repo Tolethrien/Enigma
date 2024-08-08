@@ -1,6 +1,6 @@
 import Link from "next/link";
 import LogoutButton from "./logoutButton";
-import { getUserData } from "@/server/supabase/back";
+import { getUserData } from "@/supabase/back";
 import { NameToUpper } from "@/utils/helpers";
 
 export default async function NavBar() {

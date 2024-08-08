@@ -1,4 +1,4 @@
-import { getCardData, getFolderData } from "@/server/supabase/actionsDB";
+import { getCardData, getFolderData } from "@/supabase/actionsDB";
 import SetPassCard from "../../_components/setPassCard";
 import FolderTitle from "../../_components/folderTitle";
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import GeneratedFolderIcon from "@/app/_components/generatedIcon";
 import ContextMenu from "@/app/_components/contextMenu";
-import { removeFolder } from "@/server/supabase/actionsDB";
+import { removeFolder } from "@/supabase/actionsDB";
 import { Tables } from "@/types/database";
 import { NameToUpper } from "@/utils/helpers";
 interface Props {

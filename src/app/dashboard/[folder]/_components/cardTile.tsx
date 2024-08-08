@@ -12,7 +12,7 @@ import passwordHidden from "@/app/_assets/passHide.svg";
 import passwordVisible from "@/app/_assets/passShow.svg";
 import { Tables } from "@/types/database";
 import { useState } from "react";
-import { removeCard, setCardFavorite } from "@/server/supabase/actionsDB";
+import { removeCard, setCardFavorite } from "@/supabase/actionsDB";
 import { useRouter } from "next/navigation";
 import { NameToUpper } from "@/utils/helpers";
 import { decipherData } from "@/crypto/cipher";

@@ -1,7 +1,7 @@
-import { getUserData } from "@/server/supabase/back";
+import { getUserData } from "@/supabase/back";
 import { redirect } from "next/navigation";
 import Input from "@/app/_components/input";
-import { signup } from "@/server/supabase/actionsUser";
+import { signup } from "@/supabase/actionsUser";
 import Link from "next/link";
 
 export default async function Register({
@@ -10,7 +10,6 @@ export default async function Register({
   searchParams: { invalid: "true" };
 }) {
   const { user } = await getUserData();
-  console.log(searchParams);
   if (user) redirect("/dashboard");
 
   return (

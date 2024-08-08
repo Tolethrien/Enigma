@@ -15,7 +15,9 @@ interface UseDecipher {
   card: Tables<"Cards">;
   folder: Omit<Tables<"Folder">, "user_id">;
 }
-
+/**
+ * @description encrypts user data using AES-256 so that it can be sent to the server securely.
+ */
 export function cipherData<T extends CipherType>(type: T, data: UseCipher[T]) {
   if (type === "addCard" || type === "editCard") {
     const {
@@ -49,6 +51,9 @@ export function cipherData<T extends CipherType>(type: T, data: UseCipher[T]) {
     } as UseCipher[T];
   }
 }
+/**
+ * @description decrypts user data using AES-256 to display it in a readable format.
+ */
 export function decipherData<T extends DecipherType>(
   type: T,
   data: UseDecipher[T],
@@ -92,17 +97,26 @@ export function decipherData<T extends DecipherType>(
     } as UseDecipher[T];
   }
 }
+/**
+ * @description checks if the cryptographic key and IV are present in sessionStorage and can be used for encryption/decryption.
+ */
 export function haveCreds() {
   const session = getSessionStorage();
   if (session?.getItem("enigmaKey") && session?.getItem("enigmaIv"))
     return true;
   return false;
 }
+/**
+ * @description generates a random 32-bit cryptographic key and a random 16-bit IV, then returns them as hexadecimal strings.
+ */
 export function generateCreds() {
   const key = randomBytes(32).toString("hex");
   const iv = randomBytes(16).toString("hex");
   return { key, iv };
 }
+/**
+ * @description main encryption function takes the key and IV stored in the Badge and uses them to encrypt messages.
+ */
 export function cipher(text: string) {
   if (!haveCreds()) return text;
   const session = getSessionStorage();
@@ -115,6 +129,9 @@ export function cipher(text: string) {
   //TODO: nie pozwol tego robic jak nie masz odkodowanych wiadomosci
   return cipher.update(text, "utf-8", "hex") + cipher.final("hex");
 }
+/**
+ * @description main decryption function takes the key and IV stored in the Badge and uses them to decrypt messages.
+ */
 export function decipher(text: string) {
   if (!haveCreds()) return text;
   const session = getSessionStorage();

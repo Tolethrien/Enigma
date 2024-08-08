@@ -1,4 +1,4 @@
-import { getAllCards, getFolderData } from "@/server/supabase/actionsDB";
+import { getAllCards, getFolderData } from "@/supabase/actionsDB";
 import CardTile from "./_components/cardTile";
 import ScrollableContent from "@/app/_components/scrollContent";
 import FolderTitle from "./_components/folderTitle";

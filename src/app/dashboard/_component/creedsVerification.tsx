@@ -1,6 +1,6 @@
 "use client";
 import { loadImage, readBadge } from "@/crypto/stegano";
-import { GetUserID } from "@/server/supabase/clientUser";
+import { GetUserID } from "@/supabase/clientUser";
 import { getLocalStorage, getSessionStorage } from "@/utils/helpers";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";

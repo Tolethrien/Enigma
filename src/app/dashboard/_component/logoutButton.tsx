@@ -1,7 +1,7 @@
 "use client";
 
 import Dialog from "@/app/_components/dialog";
-import { LogoutUser } from "@/server/supabase/clientUser";
+import { LogoutUser } from "@/supabase/clientUser";
 import { getSessionStorage } from "@/utils/helpers";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

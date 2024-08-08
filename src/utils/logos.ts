@@ -11,6 +11,7 @@ import prime from "@/app/_assets/logos/prime video.svg";
 import spotify from "@/app/_assets/logos/spotify.svg";
 import tinder from "@/app/_assets/logos/tinder.svg";
 export type Logos = keyof typeof logos;
+// helper to keep all logos in one object to ease of use
 const logos = {
   github,
   amazon,

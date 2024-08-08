@@ -1,4 +1,4 @@
-import { getAllFolders } from "@/server/supabase/actionsDB";
+import { getAllFolders } from "@/supabase/actionsDB";
 import FolderTilesList from "../_components/folderTilesList";
 export default async function Dashboard() {
   const data = await getAllFolders();

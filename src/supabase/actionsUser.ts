@@ -59,13 +59,10 @@ export async function sendPasswordReset(formData: FormData) {
     console.log(error);
     redirect("./error");
   }
-
-  revalidatePath("/", "layout");
-  redirect("/dashboard/settings");
+  await supabase.auth.signOut();
 }
 export async function setNewPassword(formData: FormData) {
-  //TODO: resetowanie dziala tylko z tej samej przegladarki
-  //TODO: zrobic strone do resetowania lepiej
+  //TODO: resetowanie dziala tylko z tej samej przegladarki - supabase problem
   const supabase = createServerClient();
   const form = {
     password: formData.get("password") as string,
@@ -102,24 +99,24 @@ export async function signup(formData: FormData) {
   revalidatePath("/", "layout");
   redirect("/auth/getBadge");
 }
-export async function uploadAvatar(formData: FormData) {
-  //TODO: require S3 to ssr
-  const supabase = createServerClient();
-  const data = {
-    file: formData.get("file") as string,
-  };
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) throw new Error("no user");
+// export async function uploadAvatar(formData: FormData) {
+//   //TODO: require S3 to ssr
+//   const supabase = createServerClient();
+//   const data = {
+//     file: formData.get("file") as string,
+//   };
+//   const {
+//     data: { user },
+//   } = await supabase.auth.getUser();
+//   if (!user) throw new Error("no user");
 
-  const { error } = await supabase.storage
-    .from("avatars")
-    .upload("pobrane.jpeg", data.file, {
-      cacheControl: "3600",
-      upsert: false,
-    });
-}
+//   const { error } = await supabase.storage
+//     .from("avatars")
+//     .upload("pobrane.jpeg", data.file, {
+//       cacheControl: "3600",
+//       upsert: false,
+//     });
+// }
 export async function deleteUser() {
   const supabase = createServerClient();
   await supabase.rpc("delete_user_account");

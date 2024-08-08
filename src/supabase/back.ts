@@ -21,6 +21,7 @@ export function createServerClient() {
           try {
             cookieStore.set({ name, value, ...options });
           } catch (error) {
+            console.warn(error);
             // The `set` method was called from a Server Component.
             // This can be ignored if you have middleware refreshing
             // user sessions.
@@ -30,6 +31,7 @@ export function createServerClient() {
           try {
             cookieStore.set({ name, value: "", ...options });
           } catch (error) {
+            console.warn(error);
             // The `delete` method was called from a Server Component.
             // This can be ignored if you have middleware refreshing
             // user sessions.

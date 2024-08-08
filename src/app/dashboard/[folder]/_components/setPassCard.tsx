@@ -5,7 +5,7 @@ import unfold from "@/app/_assets/unfold.svg";
 import log from "@/app/_assets/log.svg";
 import lock from "@/app/_assets/lock.svg";
 import dice from "@/app/_assets/dice.svg";
-import { addCard, editCard } from "@/server/supabase/actionsDB";
+import { addCard, editCard } from "@/supabase/actionsDB";
 import { useRef, useState } from "react";
 import { Tables } from "@/types/database";
 import { NameToUpper } from "@/utils/helpers";

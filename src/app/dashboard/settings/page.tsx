@@ -1,7 +1,7 @@
 import OptionSlot from "./_components/optionSlot";
 import ScrollableContent from "@/app/_components/scrollContent";
 import Link from "next/link";
-import { getUserData } from "@/server/supabase/back";
+import { getUserData } from "@/supabase/back";
 import Badge from "./_components/badge";
 import { assertion } from "@/utils/helpers";
 import ClearBadge from "./_components/clearBadge";

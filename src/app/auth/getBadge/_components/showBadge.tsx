@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { generateCreds } from "@/crypto/cipher";
 import { getLocalStorage, saveBadge } from "@/utils/helpers";
-import { GetUserID } from "@/server/supabase/clientUser";
+import { GetUserID } from "@/supabase/clientUser";
 
 type BadgeState = "unverified" | "haveBadge" | "needBadge";
 export default function GeneratedBadge() {
