@@ -18,7 +18,7 @@ Login: Preview@milfinity.pl
 
 Password: Preview#Preview123
 
-## Działanie
+## How It Works
 
 Enigma uses AES-256 encryption to store sensitive data and steganography to securely store users' cryptographic keys.
 

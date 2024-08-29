@@ -1,0 +1,16 @@
+{
+  "short_name": "Enigma - Password Manager",
+  "name": "Enigma",
+  "icons": [
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "black",
+  "background_color": "#282C34"
+}
