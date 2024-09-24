@@ -13,7 +13,10 @@ export default async function Login({
   if (user) redirect("/dashboard");
   return (
     <div className="flex h-full flex-col">
-      <h1 className="my-[8vh] text-center text-5xl">Enigma</h1>
+      <h1 className="relative my-[8vh] w-fit self-center text-center text-5xl">
+        Enigma
+        <p className="absolute right-0 top-full text-sm">(Demo)</p>
+      </h1>
       <div className="mt-[10vh] flex w-full flex-grow flex-col items-center gap-8">
         <form className="relative flex flex-col gap-8 *:text-2xl *:placeholder:text-lg">
           {searchParams.invalid && (
@@ -35,12 +38,13 @@ export default async function Login({
           ></Input>
           <button formAction={login}>Login</button>
         </form>
-        <Link
-          href={"./register"}
-          className="flex w-full items-center justify-center text-2xl"
+        <button
+          className="relative flex w-full items-center justify-center text-2xl"
+          disabled
         >
-          Register
-        </Link>
+          Register{" "}
+          <span className="absolute top-full text-sm">(disabled in demo)</span>
+        </button>
       </div>
       <Link href={"./reset"} className="my-[15vh] mr-6 text-right text-2xl">
         forgot again?

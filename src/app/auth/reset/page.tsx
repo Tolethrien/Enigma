@@ -27,7 +27,12 @@ export default async function Reset() {
             formID="email"
             required
           ></Input>
-          <button formAction={sendPasswordReset}>Send!</button>
+          <button disabled className="relative">
+            Send!
+            <span className="absolute left-1/2 top-full -translate-x-1/2 text-sm">
+              (disabled in demo)
+            </span>
+          </button>
         </form>
       </div>
     </div>

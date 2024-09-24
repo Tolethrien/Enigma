@@ -20,6 +20,10 @@ export default async function UserSettings() {
           X
         </Link>
       </div>
+      <div className="text-center text-red-700">
+        NOTE! this is demo version, buttons like changing acc info and badge
+        will be disabled
+      </div>
       <ScrollableContent>
         {/* user */}
         <div className="w-full px-4">

@@ -19,12 +19,9 @@ export default function OptionSlot({ param, optionName, optionValue }: Props) {
     <div className="flex w-full  text-nowrap py-2 text-xl">
       <p className="w-[35%]">{optionName}</p>
       <p className="flex-grow">{optionValue}</p>
-      <Link
-        href={`./settings/${param}`}
-        className="flex items-center justify-center"
-      >
+      <button className="flex items-center justify-center" disabled>
         <Image src={menuIco} alt="options" />
-      </Link>
+      </button>
     </div>
   );
 }

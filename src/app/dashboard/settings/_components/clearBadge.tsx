@@ -23,8 +23,12 @@ export default function ClearBadge({ id }: Props) {
   };
   return (
     <>
-      <button className="text-xl text-red-700" onClick={() => setOpen(true)}>
-        Clear Badge
+      <button
+        className="text-xl text-red-700"
+        onClick={() => setOpen(true)}
+        disabled
+      >
+        {"Clear Badge (Disabled in Demo)"}
       </button>
       {open && (
         <Dialog>

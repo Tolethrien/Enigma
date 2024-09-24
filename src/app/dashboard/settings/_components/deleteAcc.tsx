@@ -31,8 +31,12 @@ export default function DeleteAccount({ id }: Props) {
   };
   return (
     <>
-      <button className="text-xl text-red-700" onClick={() => setOpen(true)}>
-        Delete Account
+      <button
+        className="text-xl text-red-700"
+        onClick={() => setOpen(true)}
+        disabled
+      >
+        {"Delete Account (Disabled in Demo)"}
       </button>
       {open && (
         <Dialog>

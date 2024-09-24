@@ -17,7 +17,7 @@ export default async function DashboardLayout({
       <NavBar></NavBar>
       <CreedsVerification>{children}</CreedsVerification>
       <div className="flex h-8 w-full items-center justify-end bg-black bg-opacity-40 pr-9">
-        <p>Enigma</p>
+        <p>Enigma (Demo version - no encryption)</p>
       </div>
     </div>
   );

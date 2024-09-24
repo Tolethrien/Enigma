@@ -4,13 +4,15 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { loadImage, readBadge } from "@/crypto/stegano";
 import { getLocalStorage, getSessionStorage, saveBadge } from "@/utils/helpers";
+import { DEMO_BADGE } from "@/crypto/demo";
 interface Props {
   id: string;
 }
 export default function Badge({ id }: Props) {
   const localStore = getLocalStorage();
   const router = useRouter();
-  const badge = localStore?.getItem(`badge-${id}`);
+  //DEMO VERSION - Hardcoded badge image
+  const badge = DEMO_BADGE;
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const sessStore = getSessionStorage();
     const file = e.target.files?.[0];

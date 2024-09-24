@@ -1,6 +1,8 @@
 import { createCipheriv, createDecipheriv, randomBytes } from "crypto";
 import { Tables } from "@/types/database";
 import { getSessionStorage } from "@/utils/helpers";
+import { DEMO_KEY, DEMO_IV } from "./demo";
+// THIS IS DEMO VERSION, WILL USE HARDCODED KEY AND IV
 
 type CipherType = "addCard" | "editCard" | "AddFolder" | "editFolder";
 interface UseCipher {
@@ -101,10 +103,12 @@ export function decipherData<T extends DecipherType>(
  * @description checks if the cryptographic key and IV are present in sessionStorage and can be used for encryption/decryption.
  */
 export function haveCreds() {
-  const session = getSessionStorage();
-  if (session?.getItem("enigmaKey") && session?.getItem("enigmaIv"))
-    return true;
-  return false;
+  //harcoded creeds, always true
+  return true;
+  // const session = getSessionStorage();
+  // if (session?.getItem("enigmaKey") && session?.getItem("enigmaIv"))
+  //   return true;
+  // return false;
 }
 /**
  * @description generates a random 32-bit cryptographic key and a random 16-bit IV, then returns them as hexadecimal strings.
@@ -123,8 +127,8 @@ export function cipher(text: string) {
   if (!session) return;
   const cipher = createCipheriv(
     "aes256",
-    Buffer.from(session.getItem("enigmaKey")!, "hex"),
-    Buffer.from(session.getItem("enigmaIv")!, "hex"),
+    Buffer.from(DEMO_KEY, "hex"),
+    Buffer.from(DEMO_IV, "hex"),
   );
   //TODO: nie pozwol tego robic jak nie masz odkodowanych wiadomosci
   return cipher.update(text, "utf-8", "hex") + cipher.final("hex");
@@ -138,8 +142,8 @@ export function decipher(text: string) {
   if (!session) return;
   const decipher = createDecipheriv(
     "aes256",
-    Buffer.from(session.getItem("enigmaKey")!, "hex"),
-    Buffer.from(session.getItem("enigmaIv")!, "hex"),
+    Buffer.from(DEMO_KEY, "hex"),
+    Buffer.from(DEMO_IV, "hex"),
   );
   try {
     return decipher.update(text, "hex", "utf-8") + decipher.final("utf-8");
