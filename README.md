@@ -1,12 +1,10 @@
 # Enigma
 
-https://enigma-ashy.vercel.app/
-
 Enigma is a password manager designed for private use by a small group of friends and myself. It's not a public product.
 
 ## Preview
 
-https://enigma-ashy.vercel.app/
+https://enigma-demo.vercel.app/
 
 A demo version is available on a separate GitHub branch.
 
@@ -14,7 +12,7 @@ To explore how the application works, you can log in with a special user account
 
 Important: Do not enter any real personal data, as anyone can log into this user account and see it.
 
-Login: Preview@milfinity.pl
+Login: preview@emberborn.xyz
 
 Password: Preview#Preview123
 
