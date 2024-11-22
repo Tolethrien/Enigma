@@ -126,7 +126,7 @@ export function cipher(text: string) {
   const session = getSessionStorage();
   if (!session) return;
   const cipher = createCipheriv(
-    "aes256",
+    "aes-256",
     Buffer.from(DEMO_KEY, "hex"),
     Buffer.from(DEMO_IV, "hex"),
   );
