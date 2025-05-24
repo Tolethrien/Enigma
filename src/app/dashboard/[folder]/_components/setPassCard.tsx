@@ -143,7 +143,9 @@ export default function SetPassCard(props: SetPassCardProps) {
               onClick={() => setPass(generateStrongPassword())}
             >
               <Image alt="" src={dice} className="rotate-45" />
-              <p className="text-center text-xl">Generate Safe Pass</p>
+              <button className="text-center text-xl">
+                Generate Safe Pass
+              </button>
               <Image alt="" src={dice} className=" -rotate-45" />
             </div>
           </div>

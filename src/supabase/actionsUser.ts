@@ -2,6 +2,7 @@
 import { createServerClient } from "./back";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 
 export const updateUserEmail = async (formData: FormData) => {
   const data = {
@@ -48,12 +49,16 @@ export async function login(formData: FormData) {
   redirect("/dashboard");
 }
 export async function sendPasswordReset(formData: FormData) {
+  console.log();
   const supabase = createServerClient();
+  const headersList = headers();
+  const host = headersList.get("host");
+  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
   const data = {
     email: formData.get("email") as string,
   };
   const { error } = await supabase.auth.resetPasswordForEmail(data.email, {
-    redirectTo: `http://localhost:3000/auth/changePass`,
+    redirectTo: `${protocol}://${host}/auth/changePass`,
   });
   if (error) {
     console.log(error);
