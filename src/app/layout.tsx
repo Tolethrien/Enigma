@@ -15,9 +15,6 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full w-full">
-      <head>
-        <link rel="manifest" href="/manifest.json" />
-      </head>
       <body
         className={`${blinker.className} m-auto h-full max-w-screen-md bg-primeBG`}
       >
