@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import { Blinker } from "next/font/google";
 import "./globals.css";
-// import PWASW from "./_components/_pwaSw";
 
 const blinker = Blinker({ weight: ["400", "600"], subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Enigma",
   description: "personal Passworder",
   creator: "Milfinity",
-  // manifest: "/manifest.json",
 };
 
 export default async function RootLayout({
@@ -21,7 +19,6 @@ export default async function RootLayout({
       <body
         className={`${blinker.className} m-auto h-full max-w-screen-md bg-primeBG`}
       >
-        {/* <PWASW /> */}
         {children}
       </body>
     </html>
