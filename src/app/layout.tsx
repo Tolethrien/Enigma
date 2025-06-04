@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Blinker } from "next/font/google";
 import "./globals.css";
 
@@ -8,6 +8,17 @@ export const metadata: Metadata = {
   description: "personal Passworder",
   creator: "Milfinity",
   manifest: "/manifest.json",
+  icons: {
+    icon: [
+      { url: "/logo144.png", sizes: "144x144", type: "image/png" },
+      { url: "/logo192.png", sizes: "192x192", type: "image/png" },
+      { url: "/logo512.png", sizes: "512x512", type: "image/png" },
+    ],
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "black",
 };
 
 export default async function RootLayout({
