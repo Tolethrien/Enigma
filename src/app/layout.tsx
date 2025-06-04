@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Enigma",
   description: "personal Passworder",
   creator: "Milfinity",
+  manifest: "/manifest.json",
 };
 
 export default async function RootLayout({
